@@ -1,0 +1,161 @@
+{
+  "generated_at": "2026-02-23T18:49:14",
+  "audit_basis": "TCR-IA project-style static document audit (prescriptiveGate, complianceGate, traceabilityCheck)",
+  "compliance_gate_mode": "strict-explicit-decision-record",
+  "input_scope": [
+    "/Users/rodrigobatt (Apagada)/auditoria_trc/notion_export/Particular e Compartilhado/📘 Dossiê Completo — Projeto Guarda e Convivência d d775939f06af419c81de91cbb28dbb82.md",
+    "/Users/rodrigobatt (Apagada)/auditoria_trc/notion_export/Espaço de trabalho de Rodrigo Baptista HQ/28c115cfd0f181b988a00042436b728a/Projetos/Sem título 2901-316b/Pedido_de_informacao_ao_conselho_.pdf"
+  ],
+  "total_files_scanned": 2,
+  "accusation_set_count": 1,
+  "classification_counts": {
+    "SUPPORTING_EVIDENCE_RELEVANT": 1,
+    "ACCUSATORY_CANDIDATE": 1
+  },
+  "accusation_set": [
+    {
+      "file_name": "📘 Dossiê Completo — Projeto Guarda e Convivência d d775939f06af419c81de91cbb28dbb82.md",
+      "file_path": "/Users/rodrigobatt (Apagada)/auditoria_trc/notion_export/Particular e Compartilhado/📘 Dossiê Completo — Projeto Guarda e Convivência d d775939f06af419c81de91cbb28dbb82.md",
+      "suffix": ".md",
+      "size_bytes": 21051,
+      "sha256": "8b78fd3bbb7e6c677935d54a4985b5a17604f213d1ca700509708a6cd48441b7",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 20243,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "artifact_type": "ANALYTICAL_ARTIFACT",
+      "artifact_type_reason": "Filename matches analytical/reporting markers (heuristic).",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=16 (filename=4, content=12).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 6,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 2,
+        "accusation_keyword_hits": {
+          "denúncia": 1,
+          "omissão": 1,
+          "reu": 2,
+          "ministério público": 3,
+          "ético": 2
+        },
+        "evidence_marker_hits": {
+          "provas": 2,
+          "extratos": 2,
+          "transferência": 1,
+          "linha do tempo": 1,
+          "anexo": 2,
+          "anexos": 1
+        },
+        "target_entity_hits": {
+          "rodrigo baptista": 6,
+          "banco": 1
+        },
+        "contains_objetivo_label": true,
+        "contains_autor_label": false,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 10,
+          "legal_medium": 4,
+          "accusation": 1
+        },
+        "density_scores": {
+          "legal_refs_density": 0.05928,
+          "accusation_density": 0.003952
+        },
+        "legal_refs_density": 0.05928,
+        "legal_terms_density": 0.05928,
+        "accusation_density": 0.003952
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "PASS",
+          "reason": "Analytical artifact: responsibility indicator found (strict explicit check).",
+          "evidence": "Responsável:** Rodrigo Baptista da Silva"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=6, evidence_markers=9"
+        }
+      },
+      "overall_outcome": "PARTIAL_PASS (static document audit; maturity/ledger not evaluated)"
+    }
+  ],
+  "non_accusation_set": [
+    {
+      "file_name": "Pedido_de_informacao_ao_conselho_.pdf",
+      "file_path": "/Users/rodrigobatt (Apagada)/auditoria_trc/notion_export/Espaço de trabalho de Rodrigo Baptista HQ/28c115cfd0f181b988a00042436b728a/Projetos/Sem título 2901-316b/Pedido_de_informacao_ao_conselho_.pdf",
+      "suffix": ".pdf",
+      "size_bytes": 52713,
+      "sha256": "44aa38a12e1c30b7b92064650db3e3a3f1e13b358b05ecd32fdcd87c0b9ce516",
+      "extraction_status": "ok",
+      "extraction_method": "pypdf",
+      "text_chars": 2185,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE_RELEVANT",
+      "artifact_type": "N/A",
+      "artifact_type_reason": "Not evaluated (non-accusatory or unreadable).",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Relevant contextual/supporting content detected."
+      ],
+      "key_signals": {
+        "dates_found": 1,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 6,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {
+          "ministério público": 1
+        },
+        "evidence_marker_hits": {
+          "e-mail": 1
+        },
+        "target_entity_hits": {
+          "rodrigo baptista": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    }
+  ]
+}

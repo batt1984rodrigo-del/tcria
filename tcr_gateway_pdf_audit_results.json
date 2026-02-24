@@ -1,0 +1,183 @@
+[
+  {
+    "file_name": "Arquivos.pdf",
+    "file_path": "/Users/rodrigobaptistadasilva/Downloads/Arquivos.pdf",
+    "pages": 9,
+    "extractable_text_chars": 23233,
+    "text_extraction_quality": "high",
+    "content_type_guess": "financial_statement_or_invoice_records",
+    "key_signals": {
+      "risk_keyword_hits": {},
+      "currency_values_found": 15,
+      "date_values_found": 3,
+      "pix_mentions": 0,
+      "timeline_markers": 1,
+      "contains_objective_label": false,
+      "contains_summary_label": true,
+      "page_text_lengths": [
+        572,
+        375,
+        390,
+        447,
+        882,
+        409,
+        9350,
+        5970,
+        4830
+      ]
+    },
+    "gates": {
+      "prescriptiveGate": {
+        "status": "PASS",
+        "reason": "No project-defined prescriptive patterns detected in extracted text.",
+        "evidence": null
+      },
+      "maturityGate": {
+        "status": "NOT_EVALUATED",
+        "reason": "KnowledgeCore.maturityScore is not present in PDF content and no repo runtime was provided.",
+        "evidence": null
+      },
+      "complianceGate": {
+        "status": "BLOCKED",
+        "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+        "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field)."
+      },
+      "ledgerRuntimeCheck": {
+        "status": "NOT_APPLICABLE",
+        "reason": "Static PDFs do not provide runtime ledger append events (LLM_RETURNED / DECISION_APPROVED / POSTCHECK_BLOCKED).",
+        "evidence": null
+      }
+    },
+    "overall_outcome": "BLOCKED (complianceGate)",
+    "summary": "Documento parece ser extrato/fatura com alta densidade transacional. Sem linguagem prescritiva bloqueante pelos padrões do projeto. Não atende integralmente ao gate de responsabilidade humana em formato verificável.",
+    "caveats": [
+      "This is a document-content audit using project gate concepts, not a legal/factual verification of claims.",
+      "PDF text extraction may omit images, scans, signatures, or formatting evidence.",
+      "maturityGate cannot be evaluated from static PDFs because KnowledgeCore metadata is absent.",
+      "Ledger/hash/HMAC checks are runtime/system controls and are not inferable from document text alone."
+    ]
+  },
+  {
+    "file_name": "Dossie_Fraude_Bradesco.pdf",
+    "file_path": "/Users/rodrigobaptistadasilva/Downloads/Dossie_Fraude_Bradesco.pdf",
+    "pages": 1,
+    "extractable_text_chars": 1706,
+    "text_extraction_quality": "high",
+    "content_type_guess": "case_dossier_or_report",
+    "key_signals": {
+      "risk_keyword_hits": {
+        "fraude": 1,
+        "prejuízo": 3,
+        "ressarcimento": 1,
+        "não autorizado": 2,
+        "dano": 1
+      },
+      "currency_values_found": 11,
+      "date_values_found": 8,
+      "pix_mentions": 4,
+      "timeline_markers": 7,
+      "contains_objective_label": true,
+      "contains_summary_label": true,
+      "page_text_lengths": [
+        1706
+      ]
+    },
+    "gates": {
+      "prescriptiveGate": {
+        "status": "PASS",
+        "reason": "No project-defined prescriptive patterns detected in extracted text.",
+        "evidence": null
+      },
+      "maturityGate": {
+        "status": "NOT_EVALUATED",
+        "reason": "KnowledgeCore.maturityScore is not present in PDF content and no repo runtime was provided.",
+        "evidence": null
+      },
+      "complianceGate": {
+        "status": "BLOCKED",
+        "reason": "DecisionRecord incomplete (missing approved).",
+        "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field). | purpose=Objetivo: subsidiar ação civil de ressarcimento contra o Banco Bradesco S.A."
+      },
+      "ledgerRuntimeCheck": {
+        "status": "NOT_APPLICABLE",
+        "reason": "Static PDFs do not provide runtime ledger append events (LLM_RETURNED / DECISION_APPROVED / POSTCHECK_BLOCKED).",
+        "evidence": null
+      }
+    },
+    "overall_outcome": "BLOCKED (complianceGate)",
+    "summary": "Documento parece dossiê narrativo/estruturado de caso. Sem linguagem prescritiva bloqueante pelos padrões do projeto. Não atende integralmente ao gate de responsabilidade humana em formato verificável.",
+    "caveats": [
+      "This is a document-content audit using project gate concepts, not a legal/factual verification of claims.",
+      "PDF text extraction may omit images, scans, signatures, or formatting evidence.",
+      "maturityGate cannot be evaluated from static PDFs because KnowledgeCore metadata is absent.",
+      "Ledger/hash/HMAC checks are runtime/system controls and are not inferable from document text alone."
+    ]
+  },
+  {
+    "file_name": "Cópia de 📘 Dossiê Ampliado — Caso Vinícius Carvalho.pdf",
+    "file_path": "/Users/rodrigobaptistadasilva/Downloads/Cópia de 📘 Dossiê Ampliado — Caso Vinícius Carvalho.pdf",
+    "pages": 8,
+    "extractable_text_chars": 10844,
+    "text_extraction_quality": "high",
+    "content_type_guess": "case_dossier_or_report",
+    "key_signals": {
+      "risk_keyword_hits": {
+        "fraude": 11,
+        "risco": 1,
+        "bloqueio": 1,
+        "prejuízo": 2,
+        "invasão": 3,
+        "não autorizado": 1,
+        "omissão": 1,
+        "dano": 4,
+        "auditoria": 2
+      },
+      "currency_values_found": 6,
+      "date_values_found": 16,
+      "pix_mentions": 2,
+      "timeline_markers": 0,
+      "contains_objective_label": false,
+      "contains_summary_label": false,
+      "page_text_lengths": [
+        1883,
+        1691,
+        1330,
+        1442,
+        1293,
+        1529,
+        1241,
+        428
+      ]
+    },
+    "gates": {
+      "prescriptiveGate": {
+        "status": "PASS",
+        "reason": "No project-defined prescriptive patterns detected in extracted text.",
+        "evidence": null
+      },
+      "maturityGate": {
+        "status": "NOT_EVALUATED",
+        "reason": "KnowledgeCore.maturityScore is not present in PDF content and no repo runtime was provided.",
+        "evidence": null
+      },
+      "complianceGate": {
+        "status": "PASS",
+        "reason": "Heuristic check found actor, purpose, and approval indicators in document text.",
+        "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field). | purpose=Este dossiê visa documentar e esclarecer, de forma técnica e narrativa, o | approval=aprovado"
+      },
+      "ledgerRuntimeCheck": {
+        "status": "NOT_APPLICABLE",
+        "reason": "Static PDFs do not provide runtime ledger append events (LLM_RETURNED / DECISION_APPROVED / POSTCHECK_BLOCKED).",
+        "evidence": null
+      }
+    },
+    "overall_outcome": "PARTIAL_PASS (static document only; maturity/ledger runtime not evaluated)",
+    "summary": "Documento parece dossiê narrativo/estruturado de caso. Sem linguagem prescritiva bloqueante pelos padrões do projeto. Tem sinais heurísticos de DecisionRecord (ator/finalidade/aprovação).",
+    "caveats": [
+      "This is a document-content audit using project gate concepts, not a legal/factual verification of claims.",
+      "PDF text extraction may omit images, scans, signatures, or formatting evidence.",
+      "maturityGate cannot be evaluated from static PDFs because KnowledgeCore metadata is absent.",
+      "Ledger/hash/HMAC checks are runtime/system controls and are not inferable from document text alone."
+    ]
+  }
+]

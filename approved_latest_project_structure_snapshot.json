@@ -1,0 +1,541 @@
+{
+  "snapshot_name": "approved_latest_project_structure",
+  "created_at": "2026-02-23T19:28:51",
+  "project_root": "/Users/rodrigobaptistadasilva/Documents/New project",
+  "tree_max_depth": 4,
+  "tree_entries": [
+    {
+      "path": ".DS_Store",
+      "type": "file",
+      "size_bytes": 14340
+    },
+    {
+      "path": ".codex",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".codex/environments",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".codex/environments/environment.toml",
+      "type": "file",
+      "size_bytes": 100
+    },
+    {
+      "path": ".git",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".git/HEAD",
+      "type": "file",
+      "size_bytes": 21
+    },
+    {
+      "path": ".git/config",
+      "type": "file",
+      "size_bytes": 137
+    },
+    {
+      "path": ".git/description",
+      "type": "file",
+      "size_bytes": 73
+    },
+    {
+      "path": ".git/hooks",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".git/hooks/applypatch-msg.sample",
+      "type": "file",
+      "size_bytes": 478
+    },
+    {
+      "path": ".git/hooks/commit-msg.sample",
+      "type": "file",
+      "size_bytes": 896
+    },
+    {
+      "path": ".git/hooks/fsmonitor-watchman.sample",
+      "type": "file",
+      "size_bytes": 4726
+    },
+    {
+      "path": ".git/hooks/post-update.sample",
+      "type": "file",
+      "size_bytes": 189
+    },
+    {
+      "path": ".git/hooks/pre-applypatch.sample",
+      "type": "file",
+      "size_bytes": 424
+    },
+    {
+      "path": ".git/hooks/pre-commit.sample",
+      "type": "file",
+      "size_bytes": 1649
+    },
+    {
+      "path": ".git/hooks/pre-merge-commit.sample",
+      "type": "file",
+      "size_bytes": 416
+    },
+    {
+      "path": ".git/hooks/pre-push.sample",
+      "type": "file",
+      "size_bytes": 1374
+    },
+    {
+      "path": ".git/hooks/pre-rebase.sample",
+      "type": "file",
+      "size_bytes": 4898
+    },
+    {
+      "path": ".git/hooks/pre-receive.sample",
+      "type": "file",
+      "size_bytes": 544
+    },
+    {
+      "path": ".git/hooks/prepare-commit-msg.sample",
+      "type": "file",
+      "size_bytes": 1492
+    },
+    {
+      "path": ".git/hooks/push-to-checkout.sample",
+      "type": "file",
+      "size_bytes": 2783
+    },
+    {
+      "path": ".git/hooks/sendemail-validate.sample",
+      "type": "file",
+      "size_bytes": 2308
+    },
+    {
+      "path": ".git/hooks/update.sample",
+      "type": "file",
+      "size_bytes": 3650
+    },
+    {
+      "path": ".git/info",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".git/info/exclude",
+      "type": "file",
+      "size_bytes": 240
+    },
+    {
+      "path": ".git/objects",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".git/objects/info",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".git/objects/pack",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".git/refs",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".git/refs/heads",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": ".git/refs/tags",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": "output",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": "output/.DS_Store",
+      "type": "file",
+      "size_bytes": 14340
+    },
+    {
+      "path": "output/audit",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": "output/audit/tcr_gateway_accusation_bundle_audit.json",
+      "type": "file",
+      "size_bytes": 93168
+    },
+    {
+      "path": "output/audit/tcr_gateway_accusation_bundle_audit.md",
+      "type": "file",
+      "size_bytes": 22143
+    },
+    {
+      "path": "output/audit/tcr_gateway_accusation_bundle_audit_report.pdf",
+      "type": "file",
+      "size_bytes": 53315
+    },
+    {
+      "path": "output/audit/tcr_gateway_accusation_bundle_audit_strict.json",
+      "type": "file",
+      "size_bytes": 91691
+    },
+    {
+      "path": "output/audit/tcr_gateway_accusation_bundle_audit_strict.md",
+      "type": "file",
+      "size_bytes": 20426
+    },
+    {
+      "path": "output/audit/tcr_gateway_accusation_bundle_audit_strict_report.pdf",
+      "type": "file",
+      "size_bytes": 52252
+    },
+    {
+      "path": "output/audit/tcr_gateway_artifact_type_policy_smoke_strict.json",
+      "type": "file",
+      "size_bytes": 5989
+    },
+    {
+      "path": "output/audit/tcr_gateway_artifact_type_policy_smoke_strict.md",
+      "type": "file",
+      "size_bytes": 2061
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit.json",
+      "type": "file",
+      "size_bytes": 1214381
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit.md",
+      "type": "file",
+      "size_bytes": 168298
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_strict.json",
+      "type": "file",
+      "size_bytes": 1209946
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_strict.md",
+      "type": "file",
+      "size_bytes": 163068
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_strict_91_files_reasons.csv",
+      "type": "file",
+      "size_bytes": 50807
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_strict_91_files_reasons.md",
+      "type": "file",
+      "size_bytes": 18730
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_strict_report.pdf",
+      "type": "file",
+      "size_bytes": 250719
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_ocr_errors.csv",
+      "type": "file",
+      "size_bytes": 119
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_ocr_errors.md",
+      "type": "file",
+      "size_bytes": 322
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict.json",
+      "type": "file",
+      "size_bytes": 1856915
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict.md",
+      "type": "file",
+      "size_bytes": 202103
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_92_files_reasons.csv",
+      "type": "file",
+      "size_bytes": 58241
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_92_files_reasons.md",
+      "type": "file",
+      "size_bytes": 45589
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_executive_summary_1page.pdf",
+      "type": "file",
+      "size_bytes": 3281
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_report.pdf",
+      "type": "file",
+      "size_bytes": 253914
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_resumo_executivo_1pagina_ptbr.pdf",
+      "type": "file",
+      "size_bytes": 3429
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_resumo_executivo_peticao_ready_1pagina.pdf",
+      "type": "file",
+      "size_bytes": 3514
+    },
+    {
+      "path": "output/audit/tcr_gateway_pdf_audit_report.pdf",
+      "type": "file",
+      "size_bytes": 11490
+    },
+    {
+      "path": "output/audit/tcr_gateway_pdf_audit_results.json",
+      "type": "file",
+      "size_bytes": 7486
+    },
+    {
+      "path": "output/audit/tcr_gateway_pdf_audit_results.md",
+      "type": "file",
+      "size_bytes": 4627
+    },
+    {
+      "path": "output/gateway",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": "output/gateway/tcr_signals_gateway_file.json",
+      "type": "file",
+      "size_bytes": 219504
+    },
+    {
+      "path": "output/pdf",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": "output/pdf/tcr-ia-compliance-gateway-summary-one-page.pdf",
+      "type": "file",
+      "size_bytes": 3675
+    },
+    {
+      "path": "output/pdf/tcr_gateway_bernardo_notion_test_audit_with_images_strict_executive_summary_1page.pdf",
+      "type": "file",
+      "size_bytes": 3285
+    },
+    {
+      "path": "output/project_snapshot",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": "scripts",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": "scripts/.audit_accusation_bundle_with_tcr_gateway.py.swp",
+      "type": "file",
+      "size_bytes": 16384
+    },
+    {
+      "path": "scripts/audit_accusation_bundle_with_tcr_gateway.py",
+      "type": "file",
+      "size_bytes": 37641
+    },
+    {
+      "path": "scripts/audit_pdfs_with_tcr_gateway.py",
+      "type": "file",
+      "size_bytes": 12914
+    },
+    {
+      "path": "scripts/generate_accusation_bundle_audit_report_pdf.py",
+      "type": "file",
+      "size_bytes": 14188
+    },
+    {
+      "path": "scripts/generate_app_summary_pdf.py",
+      "type": "file",
+      "size_bytes": 16269
+    },
+    {
+      "path": "scripts/generate_bernardo_accusatory_executive_summary_pdf.py",
+      "type": "file",
+      "size_bytes": 8525
+    },
+    {
+      "path": "scripts/generate_bernardo_accusatory_executive_summary_pdf_peticao.py",
+      "type": "file",
+      "size_bytes": 7778
+    },
+    {
+      "path": "scripts/generate_bernardo_accusatory_executive_summary_pdf_ptbr.py",
+      "type": "file",
+      "size_bytes": 9069
+    },
+    {
+      "path": "scripts/generate_tcr_audit_report_pdf.py",
+      "type": "file",
+      "size_bytes": 13930
+    },
+    {
+      "path": "scripts/generate_tcr_signals_gateway_file.py",
+      "type": "file",
+      "size_bytes": 20168
+    },
+    {
+      "path": "tmp",
+      "type": "dir",
+      "size_bytes": null
+    },
+    {
+      "path": "tmp/.DS_Store",
+      "type": "file",
+      "size_bytes": 8196
+    },
+    {
+      "path": "tmp/pdfs",
+      "type": "dir",
+      "size_bytes": null
+    }
+  ],
+  "key_scripts": [
+    {
+      "path": "scripts/audit_accusation_bundle_with_tcr_gateway.py",
+      "exists": true,
+      "size_bytes": 37641
+    },
+    {
+      "path": "scripts/generate_accusation_bundle_audit_report_pdf.py",
+      "exists": true,
+      "size_bytes": 14188
+    },
+    {
+      "path": "scripts/generate_bernardo_accusatory_executive_summary_pdf.py",
+      "exists": true,
+      "size_bytes": 8525
+    },
+    {
+      "path": "scripts/generate_bernardo_accusatory_executive_summary_pdf_ptbr.py",
+      "exists": true,
+      "size_bytes": 9069
+    },
+    {
+      "path": "scripts/generate_bernardo_accusatory_executive_summary_pdf_peticao.py",
+      "exists": true,
+      "size_bytes": 7778
+    },
+    {
+      "path": "scripts/generate_tcr_signals_gateway_file.py",
+      "exists": true,
+      "size_bytes": 20168
+    }
+  ],
+  "key_artifacts": [
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict.json",
+      "exists": true,
+      "size_bytes": 1856915
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict.md",
+      "exists": true,
+      "size_bytes": 202103
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_report.pdf",
+      "exists": true,
+      "size_bytes": 253914
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_92_files_reasons.md",
+      "exists": true,
+      "size_bytes": 45589
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_92_files_reasons.csv",
+      "exists": true,
+      "size_bytes": 58241
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_ocr_errors.md",
+      "exists": true,
+      "size_bytes": 322
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_ocr_errors.csv",
+      "exists": true,
+      "size_bytes": 119
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_executive_summary_1page.pdf",
+      "exists": true,
+      "size_bytes": 3281
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_resumo_executivo_1pagina_ptbr.pdf",
+      "exists": true,
+      "size_bytes": 3429
+    },
+    {
+      "path": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict_resumo_executivo_peticao_ready_1pagina.pdf",
+      "exists": true,
+      "size_bytes": 3514
+    }
+  ],
+  "approved_state_summary": {
+    "source_json": "output/audit/tcr_gateway_bernardo_notion_test_audit_with_images_strict.json",
+    "generated_at": "2026-02-23T18:53:51",
+    "total_files_scanned": 1011,
+    "accusation_set_count": 92,
+    "classification_counts": {
+      "NEUTRAL_OR_CONTEXT": 599,
+      "SUPPORTING_EVIDENCE_RELEVANT": 258,
+      "ACCUSATORY_CANDIDATE": 92,
+      "SUPPORTING_EVIDENCE": 28,
+      "UNREADABLE_OR_EMPTY": 33,
+      "SENSITIVE_EXCLUDED": 1
+    },
+    "accusation_outcomes": {
+      "PARTIAL_PASS (traceability warning; static audit)": 20,
+      "PARTIAL_PASS (static document audit; maturity/ledger not evaluated)": 32,
+      "BLOCKED (complianceGate)": 36,
+      "BLOCKED (prescriptiveGate)": 4
+    },
+    "accusation_artifact_types": {
+      "ANALYTICAL_ARTIFACT": 54,
+      "DECISION_ARTIFACT": 38
+    },
+    "accusation_gate_status_counts": {
+      "prescriptiveGate": {
+        "PASS": 88,
+        "BLOCKED": 4
+      },
+      "complianceGate": {
+        "WARN": 50,
+        "BLOCKED": 38,
+        "PASS": 4
+      },
+      "traceabilityCheck": {
+        "WARN": 42,
+        "PASS": 50
+      }
+    }
+  }
+}

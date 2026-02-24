@@ -1,0 +1,2803 @@
+{
+  "generated_at": "2026-02-23T17:13:58",
+  "audit_basis": "TCR-IA project-style static document audit (prescriptiveGate, complianceGate, traceabilityCheck)",
+  "compliance_gate_mode": "default-heuristic",
+  "total_files_scanned": 42,
+  "accusation_set_count": 18,
+  "classification_counts": {
+    "ACCUSATORY_CANDIDATE": 18,
+    "SUPPORTING_EVIDENCE": 18,
+    "SUPPORTING_EVIDENCE_RELEVANT": 4,
+    "UNREADABLE_OR_EMPTY": 1,
+    "SENSITIVE_EXCLUDED": 1
+  },
+  "accusation_set": [
+    {
+      "file_name": "# 📘 Dossiê Ampliado — Caso Vinícius Carvalho.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/# 📘 Dossiê Ampliado — Caso Vinícius Carvalho.docx",
+      "suffix": ".docx",
+      "size_bytes": 21318,
+      "sha256": "b5a7808cfa8841faa065286b740de6167fa901b3b95dfbfda62a2505cc6cb436",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 10539,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=16 (filename=4, content=12).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 16,
+        "currency_values_found": 6,
+        "pix_mentions": 2,
+        "email_mentions": 0,
+        "transaction_terms": 9,
+        "accusation_keyword_hits": {
+          "fraude": 11,
+          "golpe": 3,
+          "reclamação": 1,
+          "prejuízo": 2,
+          "negligência": 2,
+          "omissão": 1,
+          "não autorizado": 1,
+          "reu": 1,
+          "ministério público": 4
+        },
+        "evidence_marker_hits": {
+          "provas": 2,
+          "extratos": 1,
+          "faturas": 1,
+          "pix": 2,
+          "logs": 2,
+          "anexo": 3,
+          "anexos": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 19,
+          "vinícius": 11,
+          "rodrigo baptista": 6,
+          "banco": 9
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 19,
+          "legal_medium": 8,
+          "accusation": 18
+        },
+        "density_scores": {
+          "legal_refs_density": 0.218237,
+          "accusation_density": 0.136635
+        },
+        "legal_refs_density": 0.218237,
+        "legal_terms_density": 0.218237,
+        "accusation_density": 0.136635
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "PASS",
+          "reason": "Heuristic check found actor, purpose, and approval indicators in file text.",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field). | purpose=Este dossiê visa documentar e esclarecer, de forma técnica e narrativa, o conjunto de fraudes bancárias, violações digitais e danos pessoais sofridos por Rodrigo Baptista da Silva, auditor fiscal da Receita Estadual d | approval=aprovado"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=16, currency=6, evidence_markers=12"
+        }
+      },
+      "overall_outcome": "PARTIAL_PASS (static document audit; maturity/ledger not evaluated)"
+    },
+    {
+      "file_name": "Cópia de Dossie_Expandido_Final_Robson_2025.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Cópia de Dossie_Expandido_Final_Robson_2025.docx",
+      "suffix": ".docx",
+      "size_bytes": 37581,
+      "sha256": "8a23001caa3ad738fee660d8436b4d961b36fb00898f2130c40f1b007c08b546",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 4306,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=13 (filename=2, content=11).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 2,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {
+          "fraude": 4,
+          "golpe": 5,
+          "prejuízo": 1,
+          "reu": 2,
+          "ação civil": 1,
+          "ministério público": 1
+        },
+        "evidence_marker_hits": {
+          "provas": 2,
+          "logs": 1,
+          "linha do tempo": 1,
+          "anexo": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 2,
+          "vinícius": 7,
+          "rodrigo baptista": 2,
+          "banco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 3,
+          "legal_medium": 0,
+          "accusation": 13
+        },
+        "density_scores": {
+          "legal_refs_density": 0.06967,
+          "accusation_density": 0.241523
+        },
+        "legal_refs_density": 0.06967,
+        "legal_terms_density": 0.06967,
+        "accusation_density": 0.241523
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field)."
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "currency=2, evidence_markers=5"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Documento (1).docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Documento (1).docx",
+      "suffix": ".docx",
+      "size_bytes": 79144,
+      "sha256": "a4c2608b116ce57979e27243be48894d87a8887f14c27238ddb72851b45884fa",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 43292,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=11 (filename=0, content=11).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 79,
+        "currency_values_found": 58,
+        "pix_mentions": 26,
+        "email_mentions": 0,
+        "transaction_terms": 133,
+        "accusation_keyword_hits": {
+          "fraude": 53,
+          "denúncia": 1,
+          "prejuízo": 8,
+          "negligência": 1,
+          "não autorizado": 4,
+          "reu": 3
+        },
+        "evidence_marker_hits": {
+          "provas": 2,
+          "extratos": 4,
+          "faturas": 28,
+          "comprovante": 1,
+          "comprovantes": 1,
+          "pix": 26,
+          "transferência": 29,
+          "e-mail": 3,
+          "anexo": 9,
+          "anexos": 3
+        },
+        "target_entity_hits": {
+          "bradesco": 47,
+          "vinícius": 19,
+          "vinicius": 23,
+          "rodrigo baptista": 8,
+          "banco": 41
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 13,
+          "legal_medium": 34,
+          "accusation": 43
+        },
+        "density_scores": {
+          "legal_refs_density": 0.069297,
+          "accusation_density": 0.07946
+        },
+        "legal_refs_density": 0.069297,
+        "legal_terms_density": 0.069297,
+        "accusation_density": 0.07946
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Responsável: Rodrigo Baptista da Silva Banco: Bradesco Período analisado: novembro de 2022 a março de 2024 Agência: 1699 | Conta-corrente: 775823-5"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=79, currency=58, evidence_markers=106"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Documento (4).docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Documento (4).docx",
+      "suffix": ".docx",
+      "size_bytes": 21011,
+      "sha256": "c2e80a6bafcf8fb6ed7f4517fd2791d19cd6504858d274bfbe5bd86eb8fb0775",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 2729,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=5 (filename=0, content=5).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 2,
+        "email_mentions": 0,
+        "transaction_terms": 4,
+        "accusation_keyword_hits": {
+          "omissão": 1,
+          "não autorizado": 1,
+          "ação civil": 1
+        },
+        "evidence_marker_hits": {
+          "extratos": 2,
+          "pix": 2,
+          "transferência": 1,
+          "e-mail": 1,
+          "anexo": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 4,
+          "rodrigo baptista": 2,
+          "banco": 7
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 2,
+          "accusation": 3
+        },
+        "density_scores": {
+          "legal_refs_density": 0.036643,
+          "accusation_density": 0.087944
+        },
+        "legal_refs_density": 0.036643,
+        "legal_terms_density": 0.036643,
+        "accusation_density": 0.087944
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose).",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field). | approval=Assinatura"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "WARN",
+          "reason": "Document has limited traceability/evidence signals.",
+          "evidence": "evidence_markers=7"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Dossie_Consolidado_Correcao_Tecnica_Logs_Fraudes.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Dossie_Consolidado_Correcao_Tecnica_Logs_Fraudes.docx",
+      "suffix": ".docx",
+      "size_bytes": 129812,
+      "sha256": "7eebe14c3b2385f00dd9a486ccc9d12c6b78a3ef29a5c11934c661b2620ce0ef",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 4877,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=15 (filename=4, content=11).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 1,
+        "currency_values_found": 2,
+        "pix_mentions": 9,
+        "email_mentions": 0,
+        "transaction_terms": 22,
+        "accusation_keyword_hits": {
+          "fraude": 7,
+          "prejuízo": 4,
+          "ação civil": 1
+        },
+        "evidence_marker_hits": {
+          "provas": 2,
+          "extratos": 3,
+          "faturas": 2,
+          "pix": 9,
+          "logs": 3,
+          "anexo": 1,
+          "anexos": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 5,
+          "vinícius": 4,
+          "rodrigo baptista": 2,
+          "banco": 7
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": true,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 11
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.180439
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.180439
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Autor: Rodrigo Baptista da Silva"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=1, currency=2, evidence_markers=21"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Dossie_Final_Unificado_Com_Grafico.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Dossie_Final_Unificado_Com_Grafico.docx",
+      "suffix": ".docx",
+      "size_bytes": 165636,
+      "sha256": "75fe7b5d1c37e13b2bcd9801f8a01010b0750dea472d5837fd8295c8cb67095c",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 11363,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=13 (filename=2, content=11).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 2,
+        "currency_values_found": 5,
+        "pix_mentions": 10,
+        "email_mentions": 0,
+        "transaction_terms": 30,
+        "accusation_keyword_hits": {
+          "fraude": 13,
+          "golpe": 4,
+          "denúncia": 1,
+          "ressarcimento": 1,
+          "prejuízo": 5,
+          "negligência": 1,
+          "omissão": 2,
+          "reu": 1,
+          "ação civil": 2,
+          "ministério público": 1
+        },
+        "evidence_marker_hits": {
+          "provas": 8,
+          "extratos": 5,
+          "faturas": 3,
+          "comprovante": 2,
+          "comprovantes": 2,
+          "pix": 10,
+          "transferência": 2,
+          "logs": 3,
+          "linha do tempo": 1,
+          "anexo": 5,
+          "anexos": 5
+        },
+        "target_entity_hits": {
+          "bradesco": 12,
+          "vinícius": 8,
+          "rodrigo baptista": 3,
+          "banco": 16
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": true,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 2,
+          "legal_medium": 5,
+          "accusation": 26
+        },
+        "density_scores": {
+          "legal_refs_density": 0.039602,
+          "accusation_density": 0.18305
+        },
+        "legal_refs_density": 0.039602,
+        "legal_terms_density": 0.039602,
+        "accusation_density": 0.18305
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Autor: Rodrigo Baptista da Silva"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=2, currency=5, evidence_markers=46"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Dossie_Final_Unificado_Com_Imagens.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Dossie_Final_Unificado_Com_Imagens.docx",
+      "suffix": ".docx",
+      "size_bytes": 540558,
+      "sha256": "46317162a97b20f906c8077162f18993f2e936cbf9af1d8014ae82408db3c100",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 11604,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=13 (filename=2, content=11).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 2,
+        "currency_values_found": 5,
+        "pix_mentions": 10,
+        "email_mentions": 0,
+        "transaction_terms": 30,
+        "accusation_keyword_hits": {
+          "fraude": 13,
+          "golpe": 4,
+          "denúncia": 1,
+          "ressarcimento": 1,
+          "prejuízo": 5,
+          "negligência": 1,
+          "omissão": 2,
+          "reu": 1,
+          "ação civil": 2,
+          "ministério público": 1
+        },
+        "evidence_marker_hits": {
+          "provas": 8,
+          "extratos": 5,
+          "faturas": 3,
+          "comprovante": 2,
+          "comprovantes": 2,
+          "pix": 10,
+          "transferência": 2,
+          "logs": 3,
+          "linha do tempo": 1,
+          "anexo": 6,
+          "anexos": 6
+        },
+        "target_entity_hits": {
+          "bradesco": 12,
+          "vinícius": 8,
+          "rodrigo baptista": 3,
+          "banco": 16
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": true,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 2,
+          "legal_medium": 5,
+          "accusation": 26
+        },
+        "density_scores": {
+          "legal_refs_density": 0.03878,
+          "accusation_density": 0.179249
+        },
+        "legal_refs_density": 0.03878,
+        "legal_terms_density": 0.03878,
+        "accusation_density": 0.179249
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Autor: Rodrigo Baptista da Silva"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=2, currency=5, evidence_markers=48"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Dossie_Rastreavel_Etico_Golpe_Bradesco.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Dossie_Rastreavel_Etico_Golpe_Bradesco.docx",
+      "suffix": ".docx",
+      "size_bytes": 38125,
+      "sha256": "4122cfccc565e3bfa464738105b9c93ccd81464855480687db460840aacf53cf",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 2971,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=15 (filename=5, content=10).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 1,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 4,
+        "accusation_keyword_hits": {
+          "fraude": 3,
+          "golpe": 1,
+          "ação civil": 1,
+          "ético": 1
+        },
+        "evidence_marker_hits": {
+          "faturas": 1,
+          "comprovante": 3,
+          "comprovantes": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 1,
+          "vinícius": 9,
+          "rodrigo baptista": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": true,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 7
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.188489
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.188489
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Autor: Rodrigo Baptista da Silva"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=1, evidence_markers=5"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "dossiê Bradesco revisado adv final.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/dossiê Bradesco revisado adv final.docx",
+      "suffix": ".docx",
+      "size_bytes": 34881,
+      "sha256": "ca157daa3a13a10191bf8a2a61260c2808514342f2f7cc7493328eef21d909d7",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 8102,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=13 (filename=3, content=10).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 8,
+        "currency_values_found": 61,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 14,
+        "accusation_keyword_hits": {
+          "fraude": 16
+        },
+        "evidence_marker_hits": {
+          "extratos": 2,
+          "faturas": 2,
+          "comprovante": 2,
+          "comprovantes": 2,
+          "e-mail": 2,
+          "anexo": 3,
+          "anexos": 3
+        },
+        "target_entity_hits": {
+          "bradesco": 14,
+          "vinicius": 3,
+          "rodrigo baptista": 2,
+          "banco": 12
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 20
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.197482
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.197482
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field)."
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=8, currency=61, evidence_markers=16"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Dossiê Fraude Bradesco — Caso Vinícius.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Dossiê Fraude Bradesco — Caso Vinícius.docx",
+      "suffix": ".docx",
+      "size_bytes": 20329,
+      "sha256": "c8c04c81c2f020d0c5d34386485d99587641820cc9a081a7f3f3610a3c5f51fc",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 3880,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=12 (filename=5, content=7).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 1,
+        "currency_values_found": 7,
+        "pix_mentions": 4,
+        "email_mentions": 0,
+        "transaction_terms": 15,
+        "accusation_keyword_hits": {
+          "fraude": 2
+        },
+        "evidence_marker_hits": {
+          "provas": 2,
+          "faturas": 3,
+          "comprovante": 1,
+          "comprovantes": 1,
+          "pix": 4,
+          "logs": 1,
+          "timeline": 1,
+          "linha do tempo": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 11,
+          "vinícius": 3,
+          "banco": 2
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 1,
+          "legal_medium": 3,
+          "accusation": 4
+        },
+        "density_scores": {
+          "legal_refs_density": 0.064433,
+          "accusation_density": 0.082474
+        },
+        "legal_refs_density": 0.064433,
+        "legal_terms_density": 0.064433,
+        "accusation_density": 0.082474
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing responsibleHuman, declaredPurpose).",
+          "evidence": "approval=aprovado"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=1, currency=7, evidence_markers=14"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "E-mails Bradesco .txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/E-mails Bradesco .txt",
+      "suffix": ".txt",
+      "size_bytes": 337621,
+      "sha256": "f36dcace5fbf89e9df848116c76e4da37750109104cb5d5a967807768782a5b6",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 337621,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=6 (filename=1, content=5).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 10,
+        "email_mentions": 52,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {
+          "reu": 2,
+          "oab": 1
+        },
+        "evidence_marker_hits": {
+          "pix": 10,
+          "e-mail": 8,
+          "emails": 144
+        },
+        "target_entity_hits": {
+          "rodrigo baptista": 2,
+          "banco": 5
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field)."
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "WARN",
+          "reason": "Document has limited traceability/evidence signals.",
+          "evidence": "evidence_markers=162"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "encaminhamento ao MP.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/encaminhamento ao MP.docx",
+      "suffix": ".docx",
+      "size_bytes": 23449,
+      "sha256": "f985f66f625bcf7928a7bae89e5ba4fb7af8a2595d01cd355e7f0db1033cc2dc",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 4406,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=12 (filename=2, content=10).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 1,
+        "email_mentions": 0,
+        "transaction_terms": 2,
+        "accusation_keyword_hits": {
+          "fraude": 5,
+          "golpe": 1,
+          "ressarcimento": 1,
+          "prejuízo": 1,
+          "ministério público": 2
+        },
+        "evidence_marker_hits": {
+          "provas": 1,
+          "extratos": 1,
+          "pix": 1,
+          "transferência": 1,
+          "e-mail": 1,
+          "anexo": 1,
+          "anexos": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 3,
+          "vinícius": 4,
+          "rodrigo baptista": 3,
+          "banco": 2
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 12
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.217885
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.217885
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose).",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field). | approval=Assinatura"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "WARN",
+          "reason": "Document has limited traceability/evidence signals.",
+          "evidence": "evidence_markers=7"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Faturas relatório .docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Faturas relatório .docx",
+      "suffix": ".docx",
+      "size_bytes": 79137,
+      "sha256": "6f4d326a12346fdf08794b01c7f51a43cea11bdd1929915fca0939eaa4561f4f",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 43292,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=11 (filename=0, content=11).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 79,
+        "currency_values_found": 58,
+        "pix_mentions": 26,
+        "email_mentions": 0,
+        "transaction_terms": 133,
+        "accusation_keyword_hits": {
+          "fraude": 53,
+          "denúncia": 1,
+          "prejuízo": 8,
+          "negligência": 1,
+          "não autorizado": 4,
+          "reu": 3
+        },
+        "evidence_marker_hits": {
+          "provas": 2,
+          "extratos": 4,
+          "faturas": 28,
+          "comprovante": 1,
+          "comprovantes": 1,
+          "pix": 26,
+          "transferência": 29,
+          "e-mail": 3,
+          "anexo": 9,
+          "anexos": 3
+        },
+        "target_entity_hits": {
+          "bradesco": 47,
+          "vinícius": 19,
+          "vinicius": 23,
+          "rodrigo baptista": 8,
+          "banco": 41
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 13,
+          "legal_medium": 34,
+          "accusation": 43
+        },
+        "density_scores": {
+          "legal_refs_density": 0.069297,
+          "accusation_density": 0.07946
+        },
+        "legal_refs_density": 0.069297,
+        "legal_terms_density": 0.069297,
+        "accusation_density": 0.07946
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Responsável: Rodrigo Baptista da Silva Banco: Bradesco Período analisado: novembro de 2022 a março de 2024 Agência: 1699 | Conta-corrente: 775823-5"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=79, currency=58, evidence_markers=106"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Memoria_Conceitual_Projetos_Rodrigo.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Memoria_Conceitual_Projetos_Rodrigo.docx",
+      "suffix": ".docx",
+      "size_bytes": 37916,
+      "sha256": "b01ee55e00d5796c223eaccf83632a369262b418ac05bc03922e8b9b72fa38be",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 2346,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=9 (filename=0, content=9).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 1,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {
+          "golpe": 4,
+          "acusação": 1,
+          "ético": 2
+        },
+        "evidence_marker_hits": {
+          "provas": 3
+        },
+        "target_entity_hits": {
+          "bradesco": 2,
+          "vinícius": 2,
+          "rodrigo baptista": 2
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 3
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.102302
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.102302
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field)."
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=1, evidence_markers=3"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Partes_Reescritas_Projeto_Golpe_Bradesco.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Partes_Reescritas_Projeto_Golpe_Bradesco.docx",
+      "suffix": ".docx",
+      "size_bytes": 37480,
+      "sha256": "59c2a06b60a6ddb62010b50ad844267390d85b4a174940d775f4b2c3f38de8ca",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 1447,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=11 (filename=3, content=8).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 1,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {
+          "fraude": 1,
+          "golpe": 2,
+          "acusação": 1,
+          "reu": 1,
+          "ético": 1
+        },
+        "evidence_marker_hits": {
+          "provas": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 2,
+          "rodrigo baptista": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 3
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.16586
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.16586
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field)."
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=1, evidence_markers=1"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Reclamacao_Etica_OAB_Advogada_Bradesco.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Reclamacao_Etica_OAB_Advogada_Bradesco.docx",
+      "suffix": ".docx",
+      "size_bytes": 38039,
+      "sha256": "6eefe22d176145f0e33e6ac58a12dac684970e511d2dadf35578987fbfba883a",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 2645,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=19 (filename=7, content=12).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 1,
+        "pix_mentions": 2,
+        "email_mentions": 0,
+        "transaction_terms": 1,
+        "accusation_keyword_hits": {
+          "fraude": 1,
+          "reclamação": 2,
+          "omissão": 1,
+          "oab": 4,
+          "ético": 1
+        },
+        "evidence_marker_hits": {
+          "extratos": 1,
+          "comprovante": 2,
+          "comprovantes": 2,
+          "pix": 2,
+          "e-mail": 2,
+          "anexo": 2,
+          "anexos": 2
+        },
+        "target_entity_hits": {
+          "bradesco": 1,
+          "rodrigo baptista": 2,
+          "banco": 2
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 7,
+          "legal_medium": 0,
+          "accusation": 1
+        },
+        "density_scores": {
+          "legal_refs_density": 0.26465,
+          "accusation_density": 0.030246
+        },
+        "legal_refs_density": 0.26465,
+        "legal_terms_density": 0.26465,
+        "accusation_density": 0.030246
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field)."
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "currency=1, evidence_markers=13"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "Sumario_Analitico_Golpe_Bradesco.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Sumario_Analitico_Golpe_Bradesco.docx",
+      "suffix": ".docx",
+      "size_bytes": 37695,
+      "sha256": "f63a2ae3eb85fbce77e1426ec240f1e20b0ddd91e76819467b4fe59b4e21b278",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 1892,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=14 (filename=3, content=11).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 1,
+        "currency_values_found": 1,
+        "pix_mentions": 1,
+        "email_mentions": 0,
+        "transaction_terms": 5,
+        "accusation_keyword_hits": {
+          "golpe": 4,
+          "ressarcimento": 1,
+          "prejuízo": 1,
+          "reu": 1,
+          "ação civil": 1,
+          "ministério público": 1
+        },
+        "evidence_marker_hits": {
+          "provas": 4,
+          "extratos": 1,
+          "faturas": 1,
+          "comprovante": 1,
+          "comprovantes": 1,
+          "pix": 1,
+          "transferência": 2,
+          "linha do tempo": 1,
+          "anexo": 1,
+          "anexos": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 2,
+          "vinícius": 4,
+          "rodrigo baptista": 1,
+          "banco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": true,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 8
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.338266
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.338266
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "BLOCKED",
+          "reason": "DecisionRecord incomplete (missing declaredPurpose, approved).",
+          "evidence": "actor=Autor: Rodrigo Baptista da Silva"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=1, currency=1, evidence_markers=14"
+        }
+      },
+      "overall_outcome": "BLOCKED (complianceGate)"
+    },
+    {
+      "file_name": "📘 Dossiê Ampliado — Caso Vinícius Carvalho.docx",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/📘 Dossiê Ampliado — Caso Vinícius Carvalho.docx",
+      "suffix": ".docx",
+      "size_bytes": 37075,
+      "sha256": "9a36a0d4d252ce88cca81e22a156815d71e7559e0c8ae8d5bbb86369c8636f66",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 10539,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "ACCUSATORY_CANDIDATE",
+      "raises_accusation": true,
+      "classification_reasons": [
+        "Accusatory score=16 (filename=4, content=12).",
+        "Mentions target entity/person.",
+        "Contains evidence/documentation markers."
+      ],
+      "key_signals": {
+        "dates_found": 16,
+        "currency_values_found": 6,
+        "pix_mentions": 2,
+        "email_mentions": 0,
+        "transaction_terms": 9,
+        "accusation_keyword_hits": {
+          "fraude": 11,
+          "golpe": 3,
+          "reclamação": 1,
+          "prejuízo": 2,
+          "negligência": 2,
+          "omissão": 1,
+          "não autorizado": 1,
+          "reu": 1,
+          "ministério público": 4
+        },
+        "evidence_marker_hits": {
+          "provas": 2,
+          "extratos": 1,
+          "faturas": 1,
+          "pix": 2,
+          "logs": 2,
+          "anexo": 3,
+          "anexos": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 19,
+          "vinícius": 11,
+          "rodrigo baptista": 6,
+          "banco": 9
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 19,
+          "legal_medium": 8,
+          "accusation": 18
+        },
+        "density_scores": {
+          "legal_refs_density": 0.218237,
+          "accusation_density": 0.136635
+        },
+        "legal_refs_density": 0.218237,
+        "legal_terms_density": 0.218237,
+        "accusation_density": 0.136635
+      },
+      "gates": {
+        "prescriptiveGate": {
+          "status": "PASS",
+          "reason": "No project-defined prescriptive patterns detected.",
+          "evidence": null
+        },
+        "maturityGate": {
+          "status": "NOT_EVALUATED",
+          "reason": "KnowledgeCore.maturityScore is not available in static file content.",
+          "evidence": null
+        },
+        "complianceGate": {
+          "status": "PASS",
+          "reason": "Heuristic check found actor, purpose, and approval indicators in file text.",
+          "evidence": "actor=Named individual(s) found in document body (heuristic, not explicit responsibility field). | purpose=Este dossiê visa documentar e esclarecer, de forma técnica e narrativa, o conjunto de fraudes bancárias, violações digitais e danos pessoais sofridos por Rodrigo Baptista da Silva, auditor fiscal da Receita Estadual d | approval=aprovado"
+        },
+        "ledgerRuntimeCheck": {
+          "status": "NOT_APPLICABLE",
+          "reason": "Static files do not expose runtime ledger events or hash-chain state.",
+          "evidence": null
+        },
+        "traceabilityCheck": {
+          "status": "PASS",
+          "reason": "Document contains multiple traceability/evidence signals.",
+          "evidence": "dates=16, currency=6, evidence_markers=12"
+        }
+      },
+      "overall_outcome": "PARTIAL_PASS (static document audit; maturity/ledger not evaluated)"
+    }
+  ],
+  "non_accusation_set": [
+    {
+      "file_name": "2023-11-18T12[]48[]14-7.csv",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/2023-11-18T12[]48[]14-7.csv",
+      "suffix": ".csv",
+      "size_bytes": 33731,
+      "sha256": "8f74373a1cb85fdbc849ad49fd40980b0dd9df2be05158a7765f9a863fd5a523",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 33731,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "CSV dataset treated primarily as supporting evidence/data source."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 364,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 2,
+          "rodrigo baptista": 4
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0,
+        "csv_rows_est": 332,
+        "csv_cols_est": 6,
+        "csv_header_preview": "Title,URL,Username,Password,Notes,OTPAuth"
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690501546.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690501546.txt",
+      "suffix": ".txt",
+      "size_bytes": 8826,
+      "sha256": "40485db175643f3b303aac616a37a2e7680ab1743fdb2882d7b8b90971df9e43",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 8601,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE_RELEVANT",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log with relevant terms."
+      ],
+      "key_signals": {
+        "dates_found": 46,
+        "currency_values_found": 33,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 6,
+        "accusation_keyword_hits": {
+          "fraude": 1
+        },
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 7,
+          "rodrigo baptista": 3,
+          "banco": 7
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 6
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.055807
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.055807
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690501555.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690501555.txt",
+      "suffix": ".txt",
+      "size_bytes": 7950,
+      "sha256": "7a1c55c6bbbe88a63ab638d993f8a39d5edbf37704b17179928a982170aae885",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 7690,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE_RELEVANT",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log with relevant terms."
+      ],
+      "key_signals": {
+        "dates_found": 17,
+        "currency_values_found": 23,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 21,
+        "accusation_keyword_hits": {
+          "fraude": 10,
+          "prejuízo": 1,
+          "negligência": 1,
+          "não autorizado": 2
+        },
+        "evidence_marker_hits": {
+          "provas": 1,
+          "extratos": 4,
+          "faturas": 1,
+          "transferência": 1
+        },
+        "target_entity_hits": {
+          "bradesco": 2,
+          "vinicius": 3,
+          "rodrigo baptista": 1,
+          "banco": 8
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 10
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.104031
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.104031
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690735559.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690735559.txt",
+      "suffix": ".txt",
+      "size_bytes": 335,
+      "sha256": "11846751cb0a9c85904b98c1752e82ecd928db6ba217963fc9573bb12bd21901",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 332,
+      "text_quality": "medium",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690735581.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690735581.txt",
+      "suffix": ".txt",
+      "size_bytes": 332,
+      "sha256": "fa463f6cae062039e941365dc584aaaaceb16a001b8e721521ebf0855b93620a",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 329,
+      "text_quality": "medium",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690739017.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690739017.txt",
+      "suffix": ".txt",
+      "size_bytes": 350,
+      "sha256": "52e3920d0219237b33056583441415d370074a66ca147be8a1d3f4d13469b089",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 347,
+      "text_quality": "medium",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690739188.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690739188.txt",
+      "suffix": ".txt",
+      "size_bytes": 350,
+      "sha256": "52e3920d0219237b33056583441415d370074a66ca147be8a1d3f4d13469b089",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 347,
+      "text_quality": "medium",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690742446.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690742446.txt",
+      "suffix": ".txt",
+      "size_bytes": 1822,
+      "sha256": "e5e3722d8b09ac126985df1eb15488aca2c2eef2f36ade83c87a93f3b542220c",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 1822,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690751458.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690751458.txt",
+      "suffix": ".txt",
+      "size_bytes": 1639,
+      "sha256": "02b772f239608ced3613cf466a7cbba320aed47ed72232a2cd2cba324fe2fa78",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 1639,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690754060.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690754060.txt",
+      "suffix": ".txt",
+      "size_bytes": 87,
+      "sha256": "8ef72e1221a0cbae7cd4c62d9a27a834349fc009b674919e0eafaa254920d40c",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 87,
+      "text_quality": "low",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE_RELEVANT",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log with relevant terms."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 1,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 2
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690756540.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690756540.txt",
+      "suffix": ".txt",
+      "size_bytes": 343,
+      "sha256": "5cda22834ad401ff822e3544d6ff87eeadb27b865bbb586361cd7c9ecf197ea8",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 340,
+      "text_quality": "medium",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690757903.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690757903.txt",
+      "suffix": ".txt",
+      "size_bytes": 1822,
+      "sha256": "bae261667e468d1f66d6b9cf7aaee8c4e1ed7d3bb8eb0d545d333606f56add24",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 1822,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690760366.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690760366.txt",
+      "suffix": ".txt",
+      "size_bytes": 27,
+      "sha256": "fd9ab7d8b4441d454d076519e56498b60900328d3d4dd58da8dde46c8ee57e59",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 27,
+      "text_quality": "low",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690760912.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690760912.txt",
+      "suffix": ".txt",
+      "size_bytes": 1840,
+      "sha256": "566abc548e36a5e56c5eb7a9611e9bc5ebc69f1837c14fb3123227c740579779",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 1840,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690764434.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690764434.txt",
+      "suffix": ".txt",
+      "size_bytes": 332,
+      "sha256": "fa463f6cae062039e941365dc584aaaaceb16a001b8e721521ebf0855b93620a",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 329,
+      "text_quality": "medium",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690764830.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690764830.txt",
+      "suffix": ".txt",
+      "size_bytes": 1435,
+      "sha256": "517647272b101616f5a0b2df1e79d84dfd28b3946ae3f962a0d0685311e92bde",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 1435,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "8690767288.txt",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/8690767288.txt",
+      "suffix": ".txt",
+      "size_bytes": 233,
+      "sha256": "5a3a05b855157f79b3ff36b3f662dc46f432e14ac607d3396d40886cfc041951",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 233,
+      "text_quality": "low",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Numeric text export/log file."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "bradesco": 1
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "artist_nodes.csv",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/artist_nodes.csv",
+      "suffix": ".csv",
+      "size_bytes": 164007,
+      "sha256": "3ca15b24e2bfe77f886c14bb88a56b18cc0f4fc4a45750c001882f1cd2b69f8a",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 159647,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE_RELEVANT",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "CSV dataset treated primarily as supporting evidence/data source.",
+        "CSV contains accusation-related terms; classified as supporting but relevant."
+      ],
+      "key_signals": {
+        "dates_found": 2,
+        "currency_values_found": 3,
+        "pix_mentions": 5,
+        "email_mentions": 0,
+        "transaction_terms": 6,
+        "accusation_keyword_hits": {
+          "fraude": 1,
+          "golpe": 6,
+          "denúncia": 1,
+          "denuncia": 1,
+          "prejuízo": 1,
+          "prejuizo": 2,
+          "reu": 3,
+          "ético": 2
+        },
+        "evidence_marker_hits": {
+          "pix": 5
+        },
+        "target_entity_hits": {
+          "bradesco": 1,
+          "vinícius": 3,
+          "vinicius": 7,
+          "rodrigo baptista": 1,
+          "banco": 9
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": true,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 11
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.005512
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.005512,
+        "csv_rows_est": 5341,
+        "csv_cols_est": 3,
+        "csv_header_preview": ""
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "Faturas_Extra_das_para_Diagn_stico.csv",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Faturas_Extra_das_para_Diagn_stico.csv",
+      "suffix": ".csv",
+      "size_bytes": 3892,
+      "sha256": "cf31e91bbc4ea35df9a15fa1bf3b3759f9f7fde95af859e0ab7dbf4d741678d6",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 3604,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "CSV dataset treated primarily as supporting evidence/data source."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 54,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {
+          "faturas": 18
+        },
+        "target_entity_hits": {
+          "bradesco": 32
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0,
+        "csv_rows_est": 19,
+        "csv_cols_est": 2,
+        "csv_header_preview": "nome_arquivo,caminho"
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "Informações Positivas bradesco.webarchive",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Informações Positivas bradesco.webarchive",
+      "suffix": ".webarchive",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "extraction_status": "ok",
+      "extraction_method": "textutil",
+      "text_chars": 0,
+      "text_quality": "none",
+      "sensitive_handling": "normal",
+      "classification": "UNREADABLE_OR_EMPTY",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "File is empty or yielded no extractable text."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {},
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "Senhas.csv",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Senhas.csv",
+      "suffix": ".csv",
+      "size_bytes": 68790,
+      "sha256": "78f3abf806558f18e99c33682b2b48793d6d17f5009fbe30be88daa4510cd937",
+      "extraction_status": "skipped_sensitive",
+      "extraction_method": "none",
+      "text_chars": 0,
+      "text_quality": "none",
+      "sensitive_handling": "skipped_content",
+      "classification": "SENSITIVE_EXCLUDED",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "Sensitive credentials file; content intentionally not read."
+      ],
+      "key_signals": {
+        "dates_found": 0,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 0,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {},
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0,
+        "csv_rows_est": 0,
+        "csv_cols_est": 0,
+        "csv_header_preview": ""
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "Todas_as_Transa__es_Bradesco__Extra__o_Completa_ 2.csv",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Todas_as_Transa__es_Bradesco__Extra__o_Completa_ 2.csv",
+      "suffix": ".csv",
+      "size_bytes": 5264,
+      "sha256": "1015066c9e0099efc6e7bc7cb942418bc88e7630da826e1868e2a6f5b8c6183e",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 5264,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "CSV dataset treated primarily as supporting evidence/data source."
+      ],
+      "key_signals": {
+        "dates_found": 88,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 89,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "vinicius": 2
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0,
+        "csv_rows_est": 89,
+        "csv_cols_est": 7,
+        "csv_header_preview": ",Data,Estabelecimento,Valor (R$),Arquivo,Vencimento,Total da Fatura (R$)"
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "Todas_as_Transa__es_Bradesco__Extra__o_Completa_.csv",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Todas_as_Transa__es_Bradesco__Extra__o_Completa_.csv",
+      "suffix": ".csv",
+      "size_bytes": 5264,
+      "sha256": "1015066c9e0099efc6e7bc7cb942418bc88e7630da826e1868e2a6f5b8c6183e",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 5264,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "CSV dataset treated primarily as supporting evidence/data source."
+      ],
+      "key_signals": {
+        "dates_found": 88,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 89,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "vinicius": 2
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0,
+        "csv_rows_est": 89,
+        "csv_cols_est": 7,
+        "csv_header_preview": ",Data,Estabelecimento,Valor (R$),Arquivo,Vencimento,Total da Fatura (R$)"
+      },
+      "gates": null,
+      "overall_outcome": null
+    },
+    {
+      "file_name": "Transa__es_Faturas_Bradesco.csv",
+      "file_path": "/Users/rodrigobaptistadasilva/Downloads/Transa__es_Faturas_Bradesco.csv",
+      "suffix": ".csv",
+      "size_bytes": 38848,
+      "sha256": "c7e8c979b100139209644a214e00843be6ecfd3aec94c2c1e45d454af2a86f77",
+      "extraction_status": "ok",
+      "extraction_method": "utf-8-sig",
+      "text_chars": 38848,
+      "text_quality": "high",
+      "sensitive_handling": "normal",
+      "classification": "SUPPORTING_EVIDENCE",
+      "raises_accusation": false,
+      "classification_reasons": [
+        "CSV dataset treated primarily as supporting evidence/data source."
+      ],
+      "key_signals": {
+        "dates_found": 637,
+        "currency_values_found": 0,
+        "pix_mentions": 0,
+        "email_mentions": 0,
+        "transaction_terms": 638,
+        "accusation_keyword_hits": {},
+        "evidence_marker_hits": {},
+        "target_entity_hits": {
+          "vinicius": 28
+        },
+        "contains_objetivo_label": false,
+        "contains_autor_label": false,
+        "contains_summary_label": false,
+        "legal_pattern_counts": {
+          "legal_strong": 0,
+          "legal_medium": 0,
+          "accusation": 0
+        },
+        "density_scores": {
+          "legal_refs_density": 0.0,
+          "accusation_density": 0.0
+        },
+        "legal_refs_density": 0.0,
+        "legal_terms_density": 0.0,
+        "accusation_density": 0.0,
+        "csv_rows_est": 638,
+        "csv_cols_est": 7,
+        "csv_header_preview": ",Data,Estabelecimento,Valor (R$),Arquivo,Vencimento,Total da Fatura (R$)"
+      },
+      "gates": null,
+      "overall_outcome": null
+    }
+  ]
+}
