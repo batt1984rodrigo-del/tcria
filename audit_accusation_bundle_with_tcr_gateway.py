@@ -22,6 +22,9 @@ OUTPUT_DIR = WORKSPACE / "output" / "audit"
 JSON_OUT = OUTPUT_DIR / "tcr_gateway_accusation_bundle_audit.json"
 MD_OUT = OUTPUT_DIR / "tcr_gateway_accusation_bundle_audit.md"
 
+ENGINE_NAME = "tcria"
+ENGINE_VERSION = "0.1.0"
+
 
 # Scope resolver for the exact user-provided bundle (via patterns + exact names).
 DISCOVERY_PATTERNS = [
@@ -204,6 +207,7 @@ class FileRecord:
     artifact_type_reason: str
     raises_accusation: bool
     classification_reasons: List[str]
+    artifact_identity: Dict[str, object]
     key_signals: Dict[str, object]
     gates: Optional[Dict[str, Dict[str, object]]]
     overall_outcome: Optional[str]
@@ -220,6 +224,12 @@ class AuditMode:
     @property
     def label(self) -> str:
         return "strict-explicit-decision-record" if self.strict_explicit_decision_record else "default-heuristic"
+
+    @property
+    def gate_policy_version(self) -> str:
+        if self.strict_explicit_decision_record:
+            return "strict-explicit-decision-record-v1"
+        return "default-heuristic-v1"
 
 
 def discover_files() -> List[Path]:
@@ -920,6 +930,14 @@ def build_markdown(payload: Dict[str, object]) -> str:
             f"- Sinais: dates={ks.get('dates_found',0)}, currency={ks.get('currency_values_found',0)}, "
             f"pix={ks.get('pix_mentions',0)}, emails={ks.get('email_mentions',0)}"
         )
+        identity = rec.get("artifact_identity") or {}
+        if identity:
+            lines.append(
+                "- Identity: "
+                f"sha256={str(identity.get('file_sha256', '-'))[:16]}..., "
+                f"engine={identity.get('engine','-')}@{identity.get('engine_version','-')}, "
+                f"policy={identity.get('gate_policy_version','-')}"
+            )
         lines.append("")
 
     lines.append("## Arquivos nao auditados como acusatorios (resumo)")
@@ -959,6 +977,7 @@ def main() -> int:
     args = parser.parse_args()
 
     mode = AuditMode(strict_explicit_decision_record=args.strict)
+    run_generated_at = datetime.now().isoformat(timespec="seconds")
     files = resolve_input_paths(args.paths)
     if not files:
         raise SystemExit("No files discovered for the configured scope.")
@@ -999,6 +1018,14 @@ def main() -> int:
         classification, raises_accusation, reasons = classify_file(path, extraction_status, text, signals)
         artifact_type = "N/A"
         artifact_type_reason = "Not evaluated (non-accusatory or unreadable)."
+        artifact_identity = {
+            "file_sha256": digest,
+            "engine": ENGINE_NAME,
+            "engine_version": ENGINE_VERSION,
+            "gate_policy_version": mode.gate_policy_version,
+            "source_path": str(path),
+            "generated_at": run_generated_at,
+        }
 
         gates = None
         overall = None
@@ -1023,6 +1050,7 @@ def main() -> int:
                 artifact_type_reason=artifact_type_reason,
                 raises_accusation=raises_accusation,
                 classification_reasons=reasons,
+                artifact_identity=artifact_identity,
                 key_signals=signals,
                 gates=gates,
                 overall_outcome=overall,
@@ -1036,9 +1064,12 @@ def main() -> int:
         counts[r.classification] = counts.get(r.classification, 0) + 1
 
     payload = {
-        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "generated_at": run_generated_at,
         "audit_basis": "TCR-IA project-style static document audit (prescriptiveGate, complianceGate, traceabilityCheck)",
         "compliance_gate_mode": mode.label,
+        "engine": ENGINE_NAME,
+        "engine_version": ENGINE_VERSION,
+        "gate_policy_version": mode.gate_policy_version,
         "input_scope": args.paths or ["legacy_discovery_bundle"],
         "total_files_scanned": len(records),
         "accusation_set_count": len(accusation_set),

@@ -16,6 +16,9 @@ metadata (DecisionRecord) and avoids prescriptive/condemnatory language.
   - `traceabilityCheck` (evidence markers, dates, currency, etc.)
 - Outputs: `*.json`, `*.md`, `*.pdf`
 
+Blocked artifacts are not reprocessed by the engine.
+They generate a complementary diagnostic report that analyzes their potential evidentiary relevance without promoting them to the official accusation bundle.
+
 ## Install (dev)
 From the repo root:
 

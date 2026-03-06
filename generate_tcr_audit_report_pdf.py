@@ -127,6 +127,15 @@ def gate_status_color(status: str):
     return colors.HexColor("#166534")
 
 
+def artifact_identity_line(item: Dict[str, Any]) -> str:
+    identity = item.get("artifact_identity") or {}
+    file_sha = identity.get("file_sha256") or item.get("sha256") or "-"
+    engine = identity.get("engine") or item.get("engine") or "tcria"
+    engine_version = identity.get("engine_version") or item.get("engine_version") or "unknown"
+    policy = identity.get("gate_policy_version") or item.get("gate_policy_version") or "unknown"
+    return f"Identity: sha256={safe_pdf_text(str(file_sha)[:16])}..., engine={safe_pdf_text(engine)}@{safe_pdf_text(engine_version)}, policy={safe_pdf_text(policy)}"
+
+
 def build_summary_table(results: List[Dict[str, Any]]) -> Table:
     rows = [["Arquivo", "Pags", "Tipo", "Prescriptive", "Compliance", "Resultado"]]
     for item in results:
@@ -261,6 +270,8 @@ def build_report(results: List[Dict[str, Any]]):
         story.append(Paragraph("Metadados e classificacao", styles["Section"]))
         story.append(build_kv_table(meta_rows, [1.6 * inch, 5.0 * inch]))
         story.append(Spacer(1, 8))
+        story.append(Paragraph(artifact_identity_line(item), styles["BodySmall"]))
+        story.append(Spacer(1, 6))
 
         gate_rows = [["Gate", "Status", "Motivo", "Evidencia"]]
         for gate_name in ["prescriptiveGate", "maturityGate", "complianceGate", "ledgerRuntimeCheck"]:
