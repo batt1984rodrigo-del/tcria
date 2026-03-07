@@ -1,4 +1,9 @@
 # TCRIA
+
+legal-tech
+document-analysis
+forensic-ai
+
 **TCRIA** is a *legal evidence governance scanner*: it ingests a folder of files and produces an audit bundle
 (JSON + Markdown + PDF) with *accusation detection*, *traceability signals*, and *governance gates*.
 
