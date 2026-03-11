@@ -1,0 +1,25 @@
+# OS / editor
+.DS_Store
+*.swp
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+*.egg-info/
+
+# Local runtime artifacts
+ci_tmp/
+output/
+cases/
+*.zip
+.env
+
+# Generated governance artifacts (can contain sensitive paths/data)
+tcr_gateway_*.json
+tcr_gateway_*.md
+tcr_gateway_*.csv
+tcr_gateway_*.pdf
+tcr_signals_gateway_file.json
+tcr-ia-compliance-gateway-summary-one-page.pdf
