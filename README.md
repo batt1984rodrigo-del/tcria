@@ -34,16 +34,9 @@ traceability signals
 governance gates
 ↓
 audit bundle
-# TCRIA — Legal Evidence Chain-of-Custody and Governance System
 
-TCRIA is a **legal evidence chain-of-custody and governance system**.
 
-It ingests heterogeneous collections of documents and produces an **auditable bundle** that records classification, traceability signals, governance gates, and accountability metadata.
-
-Its role is **not to write legal pleadings or decide legal theses**.  
-Instead, it preserves a controlled **documentary chain of custody** before human legal decision-making.
-
----
+ ---
 
 # Purpose
 
