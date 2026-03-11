@@ -1,16 +1,55 @@
+# TCRIA
+
+**TCRIA** is a governance system for legal evidence processing pipelines.
+
+Instead of generating accusations or legal arguments automatically, TCRIA preserves the **documentary chain of custody** of heterogeneous evidence collections. The system ingests mixed archives of legal materials, classifies artifacts, records traceability signals, and applies governance gates that require explicit human accountability before accusatory narratives can pass through the system.
+
+Each run produces an **auditable evidence bundle** (JSON, Markdown, and PDF) documenting how documents were processed, which governance checks were applied, and where responsibility was declared.
+
+TCRIA is designed to support **legal audits, investigations, and evidence organization workflows** while maintaining strict responsibility boundaries between automated document processing and human legal judgment.
+
+---
+
+## Key idea
+
+TCRIA treats document analysis as a **custody workflow**, not merely text extraction.
+
+Instead of producing conclusions automatically, the system ensures that:
+
+* documentary evidence remains traceable
+* accusatory narratives require explicit human accountability
+* heterogeneous archives can be processed safely
+* the evidentiary chain remains auditable
+
+---
+
+## Pipeline overview
+
+document ingestion
+↓
+classification
+↓
+traceability signals
+↓
+governance gates
+↓
+audit bundle
 # TCRIA — Legal Evidence Chain-of-Custody and Governance System
 
-TCRIA is a governance gateway for documentary evidence pipelines.
+TCRIA is a **legal evidence chain-of-custody and governance system**.
 
-It processes heterogeneous document collections and produces an auditable bundle that records classification, traceability signals, governance gates, and accountability metadata.
+It ingests heterogeneous collections of documents and produces an **auditable bundle** that records classification, traceability signals, governance gates, and accountability metadata.
 
-Its role is not to write legal pleadings or decide legal theses. It preserves a controlled documentary chain of custody before human legal decision-making.
+Its role is **not to write legal pleadings or decide legal theses**.  
+Instead, it preserves a controlled **documentary chain of custody** before human legal decision-making.
 
-## Purpose
+---
 
-Legal cases often begin with large collections of mixed documents:
+# Purpose
 
-- PDF files
+Legal cases often begin with **large collections of mixed documents**, such as:
+
+- PDFs
 - DOCX files
 - notes
 - reports
@@ -20,123 +59,145 @@ Legal cases often begin with large collections of mixed documents:
 
 Most tools only extract text or rank files.
 
-TCRIA adds a governance layer so that:
+TCRIA introduces a **governance layer** that ensures:
 
 - accusatory narratives are not promoted without accountability
 - documentary evidence remains traceable
 - responsibility for narrative promotion is explicit
-- mixed archives are processed without uncontrolled conclusions
+- heterogeneous archives can be processed without producing uncontrolled conclusions
 
-## Why this exists
+The system therefore acts as a **custody and governance layer for legal documentation**.
 
-Document analysis without governance can produce conclusions that are hard to audit.
+---
 
-TCRIA introduces governance gates before narrative promotion. The result is a controlled evidentiary trail that is inspectable by legal, audit, and risk teams.
+# Why this exists
 
-Quick framing:
+Most document analyzers simply extract text and rank files.
 
-```text
-Problem: document analysis without governance control
-Solution: governance gateway before narrative promotion
-Outcome: auditable chain-of-custody bundle (JSON / Markdown / PDF)
-```
+TCRIA adds **governance gates** so that accusatory content does not "pass" unless it carries explicit accountability metadata (`DecisionRecord`) and avoids prescriptive or condemnatory language.
 
-## Architecture overview
+This protects the **chain of custody of narrative responsibility**.
 
-```text
-Documents
-   ↓
-TCRIA Engine
-   ↓
-Governance Gates
-   ↓
-Audit Bundle
-   ↓
-Reports / API / UI
-```
+---
 
-## Core concept: documentary chain of custody
+# Core concept: documentary chain of custody
 
-```text
+TCRIA treats document processing as a **custody workflow**, not merely analysis.
+
+The system records how documents move through the pipeline:
+
 document ingestion
-        ↓
+↓
 classification
-        ↓
+↓
 traceability signals
-        ↓
+↓
 governance gates
-        ↓
-audit bundle
-```
+↓
+audit bundle 
 
-This produces a controlled evidentiary trail before human interpretation.
+This produces a **controlled evidentiary trail** before human interpretation.
 
-## Features (MVP)
+---
 
-- Scan folders of mixed files: `PDF`, `DOCX`, `TXT`, `MD`
-- Classify artifacts as:
-  - neutral / context
-  - supporting evidence
-  - relevant evidence
-  - accusatory candidates
-- Apply governance gates:
-  - `prescriptiveGate`: blocks condemnatory or prescriptive language
-  - `complianceGate`: requires explicit accountability metadata in strict mode
-  - `traceabilityCheck`: detects dates, references, evidentiary markers, and currency indicators
-- Generate outputs: `*.json`, `*.md`, `*.pdf`
+# Features (MVP)
 
-Blocked artifacts are not promoted to the official accusation bundle. They can generate a complementary diagnostic report for evidentiary review without narrative promotion.
+### Document ingestion
 
-## Accountability metadata (DecisionRecord)
+Scan folders of mixed files:
 
-To promote accusatory content through the compliance gate, a document must include a DecisionRecord header.
+- PDF
+- DOCX
+- TXT
+- MD
+
+---
+
+### Evidence classification
+
+Artifacts are classified as:
+
+- neutral / context
+- supporting evidence
+- relevant evidence
+- accusatory candidates
+
+---
+
+### Governance gates
+
+Three governance checks protect the custody chain:
+
+**prescriptiveGate**
+
+Blocks condemnatory or prescriptive language.
+
+**complianceGate**
+
+Requires explicit accountability metadata in strict mode.
+
+**traceabilityCheck**
+
+Looks for signals such as:
+
+- dates
+- references
+- evidentiary markers
+- currency indicators
+
+---
+
+### Audit bundle output
+
+Each run produces:
+
+- JSON audit bundle
+- Markdown report
+- PDF audit report
+
+These outputs document how the system interpreted the collection.
+
+Blocked artifacts are **not reprocessed by the engine**.
+
+Instead they generate a **diagnostic report** analyzing potential evidentiary relevance without promoting them to the official accusation bundle.
+
+---
+
+# Accountability metadata
+
+To promote accusatory content through the compliance gate, the document must include a **DecisionRecord** header.
 
 Example:
 
 ```text
 [TCR-IA DECISION RECORD]
 responsibleHuman: Rodrigo Baptista da Silva
-declaredPurpose: Auditoria documental e organizacao de evidencias para fins juridicos
+declaredPurpose: Auditoria documental e organização de evidências para fins jurídicos
 approved: YES
 approvedAt: 2026-03-05
 [/TCR-IA DECISION RECORD]
 ```
 
-This keeps responsibility for narrative promotion human-declared.
+This ensures that **responsibility for narrative promotion remains human-declared**.
 
-## What TCRIA does NOT do
+---
 
-TCRIA intentionally does not:
+# What TCRIA does NOT do
+
+TCRIA intentionally does **not**:
 
 - generate legal pleadings
 - write accusations
 - construct legal theses
 - produce petitions automatically
 
-Those activities require human legal judgment and responsibility.
+Those activities require **human legal judgment and responsibility**.
 
-## Repository structure
+TCRIA instead provides a **governed evidentiary foundation** that can later support human legal workflows.
 
-```text
-tcria/
-├── tcria/
-│   ├── ingestion/
-│   ├── signals/
-│   ├── classification/
-│   ├── governance/
-│   ├── audit/
-│   ├── engine.py
-│   └── cli.py
-├── api/
-│   └── api.py
-├── app/
-│   └── streamlit_app.py
-├── cases/
-├── scripts/
-└── run_governance_pipeline.py
-```
+---
 
-## Installation
+# Installation
 
 From the repository root:
 
@@ -147,24 +208,9 @@ pip install -U pip
 pip install -e .
 ```
 
-Optional OpenAI integration:
+# CLI usage
 
-```bash
-cp .env.example .env
-# edit .env and set your real OpenAI key
-```
-
-Example `.env`:
-
-```bash
-OPENAI_API_KEY="sk-..."
-TCRIA_OPENAI_MODEL="gpt-4.1-mini"
-TCRIA_ALLOWED_INPUT_ROOTS="/srv/tcria/cases,/srv/tcria/uploads"
-```
-
-## CLI usage
-
-Legacy compatibility command:
+Run from the repository root:
 
 ```bash
 tcria scan ~/Downloads --strict
@@ -310,16 +356,17 @@ curl -X POST http://127.0.0.1:8000/gateways/legacy-accusation-audit \
 ```
 
 ## Web interface
+# Web interface
+
+A simple web interface is available via Streamlit:
 
 ```bash
 streamlit run app.py
 ```
 
-If `OPENAI_API_KEY` is configured, the Streamlit app can run preset Responses API analyses after the audit completes.
+# Outputs
 
-## Outputs
-
-Modular engine run output:
+Each run produces an audit bundle:
 
 ```text
 output/audit/
@@ -328,29 +375,9 @@ output/audit/
     audit_report.pdf
 ```
 
-Case workspace output:
+These artifacts document:
 
-```text
-cases/<case_id>/
-    input/
-    audit/
-    blocked/
-    preparation/
-    timeline/
-    report/
-    case_manifest.json
-```
-
-## Roadmap
-
-- move remaining scripts into `tcria/` modules
-- add DecisionRecord sidecar support (`file.ext.tcria.json`)
-- expand automated tests with golden outputs
-- strengthen CI pipelines
-- evolve case workspace management
-
-## Summary
-
-TCRIA is not a legal decision engine.
-
-It is a chain-of-custody governance system for legal document collections, designed to ensure evidence and narratives are handled with traceability, accountability, and procedural discipline before human legal action.
+- classification results
+- governance gate outcomes
+- traceability signals
+- compliance diagnostics
