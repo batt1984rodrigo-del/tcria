@@ -2,11 +2,12 @@
 from __future__ import annotations
 
 import argparse
-import re
 import subprocess
 import sys
 from pathlib import Path
 from typing import Optional
+
+from tcria.engine import TCRIAEngine
 
 
 def run_cmd(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -21,13 +22,6 @@ def run_cmd(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
         print(cp.stderr, end="", file=sys.stderr)
         raise SystemExit(cp.returncode)
     return cp
-
-
-def extract_audit_json_path(stdout: str) -> Optional[Path]:
-    match = re.search(r"^JSON report:\s*(.+)$", stdout, flags=re.MULTILINE)
-    if not match:
-        return None
-    return Path(match.group(1).strip()).expanduser().resolve()
 
 
 def default_review_paths(audit_json: Path) -> tuple[Path, Path]:
@@ -49,9 +43,19 @@ def parse_args() -> argparse.Namespace:
         help="Repository root where scripts are located.",
     )
     parser.add_argument(
+        "--output-dir",
+        default="output/audit",
+        help="Output directory for official audit artifacts in modular engine mode.",
+    )
+    parser.add_argument(
         "--audit-script",
         default="audit_accusation_bundle_with_tcr_gateway.py",
-        help="Path (relative to repo root) for official audit script.",
+        help="Path (relative to repo root) for official audit script (legacy mode).",
+    )
+    parser.add_argument(
+        "--legacy-audit-script",
+        action="store_true",
+        help="Use the legacy audit script instead of the modular TCRIA engine.",
     )
     parser.add_argument(
         "--review-script",
@@ -73,6 +77,18 @@ def parse_args() -> argparse.Namespace:
         "--output-stem",
         default=None,
         help="Output stem passed to official audit script.",
+    )
+    parser.add_argument(
+        "--max-files",
+        type=int,
+        default=None,
+        help="Maximum number of supported files to scan.",
+    )
+    parser.add_argument(
+        "--max-total-bytes",
+        type=int,
+        default=None,
+        help="Maximum total bytes across scanned files.",
     )
     parser.add_argument(
         "--skip-audit",
@@ -107,6 +123,7 @@ def main() -> int:
         raise SystemExit(f"Review script not found: {review_script}")
 
     audit_json: Optional[Path] = None
+    audit_md: Optional[Path] = None
 
     if args.skip_audit:
         if not args.audit_json:
@@ -116,23 +133,54 @@ def main() -> int:
             raise SystemExit(f"Audit JSON not found: {audit_json}")
         print(f"[pipeline] Official audit skipped. Using: {audit_json}")
     else:
-        if not audit_script.exists():
-            raise SystemExit(f"Audit script not found: {audit_script}")
-        audit_cmd = [sys.executable, str(audit_script)]
-        if args.strict:
-            audit_cmd.append("--strict")
-        if args.output_stem:
-            audit_cmd.extend(["--output-stem", args.output_stem])
-        for p in args.paths or []:
-            audit_cmd.extend(["--path", p])
-
+        if not args.paths:
+            raise SystemExit("At least one --path is required unless --skip-audit is used.")
         print("[pipeline] Running official audit...")
-        audit_cp = run_cmd(audit_cmd, cwd=repo_root)
-        print(audit_cp.stdout, end="")
+        if args.legacy_audit_script:
+            if not audit_script.exists():
+                raise SystemExit(f"Audit script not found: {audit_script}")
+            audit_cmd = [sys.executable, str(audit_script)]
+            if args.strict:
+                audit_cmd.append("--strict")
+            if args.output_stem:
+                audit_cmd.extend(["--output-stem", args.output_stem])
+            for p in args.paths or []:
+                audit_cmd.extend(["--path", p])
 
-        audit_json = extract_audit_json_path(audit_cp.stdout)
-        if not audit_json:
-            raise SystemExit("Could not detect official audit JSON path from command output.")
+            audit_cp = run_cmd(audit_cmd, cwd=repo_root)
+            print(audit_cp.stdout, end="")
+
+            marker = "JSON report:"
+            for line in (audit_cp.stdout or "").splitlines():
+                if line.startswith(marker):
+                    audit_json = Path(line.split(marker, 1)[1].strip()).expanduser().resolve()
+                    break
+            if not audit_json:
+                raise SystemExit("Could not detect official audit JSON path from legacy command output.")
+            audit_md = audit_json.with_suffix(".md")
+        else:
+            engine = TCRIAEngine(repo_root=repo_root)
+            stem = args.output_stem or "tcr_gateway_accusation_bundle_audit"
+            try:
+                result = engine.run_audit(
+                    input_paths=args.paths,
+                    strict=args.strict,
+                    out_dir=(repo_root / args.output_dir).resolve(),
+                    output_stem=stem,
+                    include_pdf=True,
+                    max_files=args.max_files,
+                    max_total_bytes=args.max_total_bytes,
+                )
+            except Exception as exc:
+                raise SystemExit(f"Official modular audit failed: {exc}") from exc
+            audit_json = Path(result["artifacts"]["json"]).expanduser().resolve()
+            audit_md = Path(result["artifacts"]["markdown"]).expanduser().resolve()
+            print(f"Mode: {'strict-explicit-decision-record' if args.strict else 'default-heuristic'}")
+            print(f"JSON report: {audit_json}")
+            print(f"Markdown report: {audit_md}")
+            print(f"Total scanned: {result['bundle']['total_files_scanned']}")
+            print(f"Accusation set: {result['bundle']['accusation_set_count']}")
+
         if not audit_json.exists():
             raise SystemExit(f"Official audit JSON was reported but not found: {audit_json}")
 
@@ -162,6 +210,8 @@ def main() -> int:
 
     print("[pipeline] Completed")
     print(f"[pipeline] Official audit JSON: {audit_json}")
+    if audit_md:
+        print(f"[pipeline] Official audit MD: {audit_md}")
     print(f"[pipeline] Blocked review JSON: {review_json_out}")
     print(f"[pipeline] Blocked review MD: {review_md_out}")
     print(

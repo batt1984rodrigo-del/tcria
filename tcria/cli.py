@@ -10,15 +10,27 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from tcria.engine import TCRIAEngine
+
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
 REPO_ROOT = PACKAGE_ROOT.parent
 
-RUN_PIPELINE_SCRIPT = REPO_ROOT / "run_governance_pipeline.py"
+
+def _first_existing(*paths: Path) -> Path:
+    for path in paths:
+        if path.exists():
+            return path
+    return paths[0]
+
+
 PREPARATION_SCRIPT = REPO_ROOT / "generate_case_preparation_summary.py"
 TIMELINE_SCRIPT = REPO_ROOT / "generate_case_timeline.py"
 UNIFIED_PDF_SCRIPT = REPO_ROOT / "generate_unified_governance_report_pdf.py"
-INVESTIGATION_SCRIPT = REPO_ROOT / "scripts" / "generate_investigation_report.py"
+INVESTIGATION_SCRIPT = _first_existing(
+    REPO_ROOT / "generate_investigation_report.py",
+    REPO_ROOT / "scripts" / "generate_investigation_report.py",
+)
 
 
 def run_command(cmd: list[str], cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -134,8 +146,6 @@ def case_init(case_dir: Path) -> int:
 def case_run(case_dir: Path, strict: bool, paths: list[str], top_k: int, output_stem: Optional[str]) -> int:
     ensure_case_structure(case_dir)
 
-    if not RUN_PIPELINE_SCRIPT.exists():
-        raise SystemExit(f"Missing script: {RUN_PIPELINE_SCRIPT}")
     if not PREPARATION_SCRIPT.exists():
         raise SystemExit(f"Missing script: {PREPARATION_SCRIPT}")
     if not TIMELINE_SCRIPT.exists():
@@ -146,32 +156,20 @@ def case_run(case_dir: Path, strict: bool, paths: list[str], top_k: int, output_
     run_paths = paths[:] if paths else [str(case_dir / "input")]
     stem = output_stem or f"{case_dir.name}_{datetime.now().strftime('%Y%m%d')}"
 
-    cmd = [
-        sys.executable,
-        str(RUN_PIPELINE_SCRIPT),
-        "--repo-root",
-        str(REPO_ROOT),
-        "--output-stem",
-        stem,
-    ]
-    if strict:
-        cmd.append("--strict")
-    for p in run_paths:
-        cmd.extend(["--path", p])
+    engine = TCRIAEngine(repo_root=REPO_ROOT)
+    try:
+        pipeline_result = engine.run_official_pipeline(
+            input_paths=run_paths,
+            strict=strict,
+            output_stem=stem,
+        )
+    except Exception as exc:
+        raise SystemExit(f"Official pipeline failed: {exc}") from exc
 
-    pipeline_cp = run_command(cmd, cwd=REPO_ROOT)
-    out = pipeline_cp.stdout or ""
-
-    audit_json = extract_line_value(out, "[pipeline] Official audit JSON:")
-    blocked_json = extract_line_value(out, "[pipeline] Blocked review JSON:")
-    blocked_md = extract_line_value(out, "[pipeline] Blocked review MD:")
-    audit_md = extract_line_value(out, "Markdown report:")
-    if not audit_json or not blocked_json:
-        raise SystemExit("Could not parse official outputs from pipeline run.")
-    if not audit_md:
-        audit_md = audit_json.with_suffix(".md")
-    if not blocked_md:
-        blocked_md = blocked_json.with_suffix(".md")
+    audit_json = Path(pipeline_result["official_audit_json"]).expanduser().resolve()
+    blocked_json = Path(pipeline_result["blocked_review_json"]).expanduser().resolve()
+    blocked_md = Path(pipeline_result["blocked_review_md"]).expanduser().resolve()
+    audit_md = Path(pipeline_result["official_audit_md"]).expanduser().resolve()
 
     prep_cp = run_command(
         [
@@ -306,6 +304,37 @@ def scan_compat(input_path: str, strict: bool, output_stem: Optional[str]) -> in
     return case_run(temp_case, strict=strict, paths=[input_path], top_k=10, output_stem=output_stem)
 
 
+def product_audit(input_path: str, strict: bool, out_dir: str, output_stem: str, include_pdf: bool, official_pipeline: bool) -> int:
+    engine = TCRIAEngine(repo_root=REPO_ROOT)
+    if official_pipeline:
+        result = engine.run_official_pipeline(input_path=input_path, strict=strict, output_stem=output_stem)
+        print("Official pipeline completed:")
+        print(f"- official_audit_json: {result['official_audit_json']}")
+        print(f"- official_audit_md: {result['official_audit_md']}")
+        print(f"- blocked_review_json: {result['blocked_review_json']}")
+        print(f"- blocked_review_md: {result['blocked_review_md']}")
+        return 0
+
+    result = engine.run_audit(
+        input_path=input_path,
+        strict=strict,
+        out_dir=out_dir,
+        output_stem=output_stem,
+        include_pdf=include_pdf,
+    )
+    bundle = result["bundle"]
+    artifacts = result["artifacts"]
+    print("Product audit completed:")
+    print(f"- total_files_scanned: {bundle['total_files_scanned']}")
+    print(f"- accusation_set_count: {bundle['accusation_set_count']}")
+    print(f"- classification_counts: {bundle['classification_counts']}")
+    print(f"- json: {artifacts['json']}")
+    print(f"- markdown: {artifacts['markdown']}")
+    if "pdf" in artifacts:
+        print(f"- pdf: {artifacts['pdf']}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="tcria", description="TCRIA — Legal evidence governance scanner.")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -338,6 +367,18 @@ def main(argv: list[str] | None = None) -> int:
     scan.add_argument("--strict", action="store_true", help="Run strict mode")
     scan.add_argument("--output-stem", default=None, help="Output stem")
 
+    product_cmd = sub.add_parser("product-audit", help="Run the modular TCRIA engine as product pipeline")
+    product_cmd.add_argument("input", help="File/folder input")
+    product_cmd.add_argument("--strict", action="store_true", help="Run strict mode")
+    product_cmd.add_argument("--out-dir", default="output/audit", help="Output directory")
+    product_cmd.add_argument("--output-stem", default="audit", help="Output stem")
+    product_cmd.add_argument("--no-pdf", action="store_true", help="Disable PDF output")
+    product_cmd.add_argument(
+        "--official-pipeline",
+        action="store_true",
+        help="Run repository official governance pipeline scripts instead of modular engine output.",
+    )
+
     args = p.parse_args(argv)
 
     if args.cmd == "case":
@@ -354,6 +395,16 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "scan":
         return scan_compat(args.input, strict=args.strict, output_stem=args.output_stem)
+
+    if args.cmd == "product-audit":
+        return product_audit(
+            input_path=args.input,
+            strict=args.strict,
+            out_dir=args.out_dir,
+            output_stem=args.output_stem,
+            include_pdf=not args.no_pdf,
+            official_pipeline=args.official_pipeline,
+        )
 
     return 0
 

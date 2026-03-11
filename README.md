@@ -147,6 +147,21 @@ pip install -U pip
 pip install -e .
 ```
 
+Optional OpenAI integration:
+
+```bash
+cp .env.example .env
+# edit .env and set your real OpenAI key
+```
+
+Example `.env`:
+
+```bash
+OPENAI_API_KEY="sk-..."
+TCRIA_OPENAI_MODEL="gpt-4.1-mini"
+TCRIA_ALLOWED_INPUT_ROOTS="/srv/tcria/cases,/srv/tcria/uploads"
+```
+
 ## CLI usage
 
 Legacy compatibility command:
@@ -193,14 +208,114 @@ uvicorn api.api:app --reload
 Main endpoints:
 
 - `GET /health`
+- `GET /capabilities`
 - `POST /audit` (modular engine)
 - `POST /audit/official-pipeline` (scripted governance pipeline)
+- `GET /responses/audit-types` (available Responses API prompt presets)
+- `POST /responses/audit` (modular audit + Responses API analysis)
+- `POST /audit/openai-summary` (backward-compatible alias to `/responses/audit`)
+- `POST /cases/init` (initialize case workspace)
+- `POST /cases/run` (run official case pipeline + blocked/preparation/timeline layers)
+- `POST /cases/investigate` (generate final investigation report from case artifacts)
+- `POST /investigations/full-run` (initialize case if needed, run full investigative pipeline, return outputs, optional Responses API analysis)
+- `POST /conclusions/from-bundle` (build gateway-style final conclusions from an audit bundle)
+- `POST /gateways/legacy-accusation-audit` (run the legacy civil/criminal accusation gateway script)
+
+Security defaults for API usage:
+
+- Input paths are restricted to `TCRIA_ALLOWED_INPUT_ROOTS` (comma-separated absolute paths).
+- If `TCRIA_ALLOWED_INPUT_ROOTS` is not set, only the server current working directory is allowed.
+- Request payload supports scan limits: `max_files` and `max_total_bytes`.
+
+Example:
+
+```bash
+uvicorn api.api:app --host 127.0.0.1 --port 8000
+```
+
+Responses API preset example:
+
+```bash
+curl -X POST http://127.0.0.1:8000/responses/audit \
+  -H "Content-Type: application/json" \
+  -d '{
+    "path": "/srv/tcria/cases/demo",
+    "strict": true,
+    "output_stem": "demo_audit",
+    "include_pdf": false,
+    "audit_type": "restitution_accountability",
+    "model": "gpt-4.1-mini",
+    "user_context": "Explain this restitution bundle for an accountability reviewer."
+  }'
+```
+
+List available audit types:
+
+```bash
+curl http://127.0.0.1:8000/responses/audit-types
+```
+
+Case workspace example:
+
+```bash
+curl -X POST http://127.0.0.1:8000/cases/init \
+  -H "Content-Type: application/json" \
+  -d '{"case":"demo_case","root":"cases"}'
+
+curl -X POST http://127.0.0.1:8000/cases/run \
+  -H "Content-Type: application/json" \
+  -d '{"case":"demo_case","root":"cases","strict":true}'
+
+curl -X POST http://127.0.0.1:8000/cases/investigate \
+  -H "Content-Type: application/json" \
+  -d '{"case":"demo_case","root":"cases"}'
+```
+
+Full investigation run example:
+
+```bash
+curl -X POST http://127.0.0.1:8000/investigations/full-run \
+  -H "Content-Type: application/json" \
+  -d '{
+    "case":"demo_case",
+    "root":"cases",
+    "strict":true,
+    "paths":["/srv/tcria/cases/demo_case/input"],
+    "top_k":10,
+    "audit_type":"civil_criminal_investigative",
+    "analyze_with_openai":true,
+    "model":"gpt-4.1-mini"
+  }'
+```
+
+Gateway conclusions example:
+
+```bash
+curl -X POST http://127.0.0.1:8000/conclusions/from-bundle \
+  -H "Content-Type: application/json" \
+  -d '{"bundle_json_path":"output/audit/audit_strict.json"}'
+```
+
+Legacy accusation gateway example:
+
+```bash
+curl -X POST http://127.0.0.1:8000/gateways/legacy-accusation-audit \
+  -H "Content-Type: application/json" \
+  -d '{
+    "path": "/srv/tcria/cases/civil_or_criminal_bundle",
+    "strict": true,
+    "output_dir": "output/audit",
+    "output_stem": "legacy_gateway_run"
+  }'
+```
 
 ## Web interface
 
 ```bash
 streamlit run app.py
 ```
+
+If `OPENAI_API_KEY` is configured, the Streamlit app can run preset Responses API analyses after the audit completes.
 
 ## Outputs
 
