@@ -1,5 +1,7 @@
 # Diff Snapshot - Current vs Approved Latest
 
+> Historical diff: this comparison was generated on 2026-02-23 against the pre-reorganization layout. The baseline/current paths below still point to the older `output/project_snapshot/...` location and should be treated as archived metadata until new snapshots are generated.
+
 - Created at: `2026-02-23T19:46:57`
 - Baseline: `output/project_snapshot/approved_latest_project_structure_snapshot.json`
 - Current: `output/project_snapshot/current_project_structure_snapshot.json`

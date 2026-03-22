@@ -1,5 +1,7 @@
 # Approved Project Structure Snapshot (Latest)
 
+> Historical snapshot: captured on 2026-02-23 before the later repository cleanup that moved sample artifacts into `examples/audit-artifacts/` and snapshots into `docs/project-snapshots/`. Paths and root metadata below reflect that earlier state.
+
 - Created at: `2026-02-23T19:28:51`
 - Project root: `/Users/rodrigobaptistadasilva/Documents/New project`
 - Tree depth captured: `4`

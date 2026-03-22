@@ -89,5 +89,7 @@
         }
       }
     }
-  }
+  },
+  "diff_status": "historical",
+  "note": "Historical diff captured on 2026-02-23 against the pre-reorganization layout; the baseline/current snapshot paths remain archived metadata until regenerated."
 }
