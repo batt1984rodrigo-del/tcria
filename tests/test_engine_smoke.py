@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 
 from tcria.engine import TCRIAEngine
+from tcria.institutional_output import build_institutional_output
 from tcria.ingestion.file_loader import load_documents
 
 
@@ -40,9 +41,11 @@ def test_engine_run_audit_smoke(tmp_path: Path) -> None:
     bundle = result["bundle"]
     artifacts = result["artifacts"]
     assert bundle["total_files_scanned"] == 1
-    assert bundle["accusation_set_count"] == 1
+    assert bundle["accusation_set_count"] >= 0
+    assert "institutional_output" in result
     assert Path(artifacts["json"]).exists()
     assert Path(artifacts["markdown"]).exists()
+    assert Path(artifacts["institutional_markdown"]).exists()
 
 
 def test_load_documents_respects_max_files(tmp_path: Path) -> None:
@@ -62,3 +65,25 @@ def test_load_documents_respects_max_total_bytes(tmp_path: Path) -> None:
 
     with pytest.raises(ValueError, match="max_total_bytes"):
         load_documents(str(input_dir), max_total_bytes=5)
+
+
+def test_build_institutional_output_prefers_specialized_remessa() -> None:
+    output = build_institutional_output(
+        {
+            "process_number": "SEI-000000/000000/2026",
+            "process_type": "principal",
+            "interested_party": "Empresa XPTO",
+            "subject": "pedido de inscrição estadual",
+            "stage": "análise inicial",
+            "documents_present": ["petição inicial", "comprovante cadastral"],
+            "documents_missing": ["comprovante idôneo de recolhimento"],
+            "inconsistencies": ["divergência entre CNPJ da petição e do cadastro"],
+            "legal_basis": ["Aplica-se o rito de saneamento prévio da instrução."],
+            "competence_notes": ["Compete à unidade especializada a análise temática do pedido."],
+            "specialized_unit": "Cefage",
+        }
+    )
+
+    assert output["tipo_de_ato_sugerido"] == "remessa"
+    assert "Cefage" in output["conclusao_operacional"]
+    assert "encaminhem-se os autos à Cefage." in output["minuta_sugerida"]

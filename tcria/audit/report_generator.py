@@ -5,6 +5,7 @@ from pathlib import Path
 
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
+from tcria.institutional_output import render_institutional_markdown
 
 
 def render_markdown_report(bundle: dict[str, object]) -> str:
@@ -62,6 +63,7 @@ def write_audit_artifacts(
     out_dir: str | Path,
     output_stem: str = "audit",
     include_pdf: bool = True,
+    institutional_output: dict[str, object] | None = None,
 ) -> dict[str, str]:
     out_path = Path(out_dir).expanduser().resolve()
     out_path.mkdir(parents=True, exist_ok=True)
@@ -69,11 +71,19 @@ def write_audit_artifacts(
     json_path = out_path / f"{output_stem}.json"
     md_path = out_path / f"{output_stem}.md"
     pdf_path = out_path / f"{output_stem}_report.pdf"
+    institutional_md_path = out_path / f"{output_stem}_institutional.md"
 
     markdown = render_markdown_report(bundle)
     json_path.write_text(json.dumps(bundle, ensure_ascii=False, indent=2), encoding="utf-8")
     md_path.write_text(markdown, encoding="utf-8")
     artifacts = {"json": str(json_path), "markdown": str(md_path)}
+
+    if institutional_output is not None:
+        institutional_md_path.write_text(
+            render_institutional_markdown(institutional_output),
+            encoding="utf-8",
+        )
+        artifacts["institutional_markdown"] = str(institutional_md_path)
 
     if include_pdf:
         _write_pdf_from_markdown(markdown, pdf_path)
