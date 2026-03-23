@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 from tcria.engine import TCRIAEngine
-from tcria.institutional_output import build_institutional_output
+from tcria.institutional_output import build_institutional_output, build_institutional_output_from_bundle
 from tcria.ingestion.file_loader import load_documents
 
 
@@ -87,3 +87,26 @@ def test_build_institutional_output_prefers_specialized_remessa() -> None:
     assert output["tipo_de_ato_sugerido"] == "remessa"
     assert "Cefage" in output["conclusao_operacional"]
     assert "encaminhem-se os autos à Cefage." in output["minuta_sugerida"]
+    assert output["qualificacao_do_problema"]["ha_unidade_especializada"] == "sim"
+
+
+def test_build_institutional_output_from_bundle_marks_preliminary_source() -> None:
+    output = build_institutional_output_from_bundle(
+        {
+            "audit_basis": "Base de auditoria TCRIA.",
+            "compliance_gate_mode": "strict-explicit-decision-record",
+            "route_counts": {"FISCAL_SUPPORT": 2},
+            "accusation_set_count": 0,
+            "accusation_set": [],
+            "non_accusation_set": [
+                {
+                    "file_name": "doc1.pdf",
+                    "classification": "SUPPORTING_EVIDENCE_RELEVANT",
+                }
+            ],
+        }
+    )
+
+    assert output["metadados_da_saida"]["fonte"] == "bundle_tcria"
+    assert output["metadados_da_saida"]["trata_se_de_leitura_preliminar"] == "sim"
+    assert output["identificacao_do_caso"]["tema"] == "matéria não detalhada no bundle TCRIA"

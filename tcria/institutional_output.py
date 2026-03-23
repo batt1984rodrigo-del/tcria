@@ -15,6 +15,18 @@ KNOWN_ACTIONS = {
     "encaminhamento",
 }
 
+ACTION_LABELS = {
+    "juntada": "juntada/vinculação",
+    "remessa": "remessa",
+    "exigencia": "exigência",
+    "apensamento": "apensamento",
+    "sobrestamento": "sobrestamento",
+    "indeferimento": "indeferimento",
+    "deferimento": "deferimento",
+    "arquivamento": "arquivamento",
+    "encaminhamento": "encaminhamento",
+}
+
 
 def _clean_text(value: Any, *, default: str = "Não informado.") -> str:
     if value is None:
@@ -26,8 +38,8 @@ def _clean_text(value: Any, *, default: str = "Não informado.") -> str:
 def _clean_list(items: Any) -> list[str]:
     if not items:
         return []
-    cleaned: list[str] = []
     iterable = items if isinstance(items, (list, tuple, set)) else [items]
+    cleaned: list[str] = []
     for item in iterable:
         text = str(item).strip()
         if text:
@@ -35,28 +47,35 @@ def _clean_list(items: Any) -> list[str]:
     return cleaned
 
 
-def _join_labels(values: dict[str, Any]) -> str:
+def _compact_dict(values: dict[str, Any]) -> str:
     if not values:
         return "Não identificado nos autos auditados."
-    ordered = [f"{key}: {value}" for key, value in sorted(values.items()) if value]
-    return "; ".join(ordered) if ordered else "Não identificado nos autos auditados."
+    parts = [f"{key}: {value}" for key, value in sorted(values.items()) if value]
+    return "; ".join(parts) if parts else "Não identificado nos autos auditados."
 
 
 def _normalize_action(value: Any) -> str | None:
     if value is None:
         return None
-    text = str(value).strip().lower().replace("ç", "c").replace("ã", "a")
-    mapping = {
+    text = (
+        str(value)
+        .strip()
+        .lower()
+        .replace("ç", "c")
+        .replace("ã", "a")
+        .replace("á", "a")
+        .replace("ê", "e")
+    )
+    aliases = {
+        "exigencia": "exigencia",
         "exigência": "exigencia",
-        "encaminhamento": "encaminhamento",
         "saneamento": "exigencia",
         "vinculacao": "juntada",
         "vinculação": "juntada",
+        "encaminhamento": "encaminhamento",
     }
-    text = mapping.get(text, text)
-    if text in KNOWN_ACTIONS:
-        return text
-    return None
+    normalized = aliases.get(text, text)
+    return normalized if normalized in KNOWN_ACTIONS else None
 
 
 def infer_recommended_action(audit_data: dict[str, Any]) -> str:
@@ -72,7 +91,9 @@ def infer_recommended_action(audit_data: dict[str, Any]) -> str:
 
     if process_type == "intercorrente" and depends_on_main:
         return "juntada"
-    if specialized_unit:
+    if depends_on_main and not documents_missing and not inconsistencies:
+        return "sobrestamento"
+    if specialized_unit and (documents_missing or inconsistencies):
         return "remessa"
     if documents_missing:
         return "exigencia"
@@ -81,12 +102,114 @@ def infer_recommended_action(audit_data: dict[str, Any]) -> str:
     return "encaminhamento"
 
 
-def build_institutional_output(audit_data: dict[str, Any]) -> dict[str, Any]:
+def _sentence(prefix: str, value: str) -> str:
+    value = value.strip().rstrip(".")
+    return f"{prefix} {value}."
+
+
+def _classify_issue(audit_data: dict[str, Any], action: str) -> dict[str, str]:
+    documents_missing = _clean_list(audit_data.get("documents_missing"))
+    inconsistencies = _clean_list(audit_data.get("inconsistencies"))
+    depends_on_main = bool(audit_data.get("depends_on_main_process"))
+    specialized_unit = _clean_text(audit_data.get("specialized_unit"), default="")
+
+    if depends_on_main:
+        nature = "vício sanável com dependência de autos principais"
+        maturity = "providência intermediária"
+    elif documents_missing:
+        nature = "insuficiência de instrução documental sanável"
+        maturity = "providência intermediária"
+    elif inconsistencies:
+        nature = "inconsistência material ou cadastral ainda saneável"
+        maturity = "providência intermediária"
+    elif action in {"indeferimento", "deferimento", "arquivamento"}:
+        nature = "instrução apta a desfecho"
+        maturity = "despacho final"
+    else:
+        nature = "instrução incompleta para fechamento conclusivo"
+        maturity = "providência intermediária"
+
+    return {
+        "natureza_do_vicio": nature,
+        "nivel_de_maturidade_decisoria": maturity,
+        "ha_unidade_especializada": "sim" if specialized_unit and specialized_unit != "Não indicada." else "não",
+        "depende_de_processo_principal": "sim" if depends_on_main else "não",
+        "ato_recomendado": ACTION_LABELS[action],
+    }
+
+
+def _build_conclusion(action: str, *, specialized_unit: str) -> str:
+    conclusions = {
+        "juntada": "Recomenda-se a juntada ou vinculação ao processo principal, preservando-se a apreciação de mérito nos autos de referência.",
+        "remessa": f"Recomenda-se a remessa dos autos à unidade competente ({specialized_unit}) para análise temática e saneamento do que foi apontado.",
+        "exigencia": "Recomenda-se a expedição de exigência para saneamento das lacunas documentais antes de qualquer apreciação conclusiva.",
+        "apensamento": "Recomenda-se o apensamento dos autos correlatos para instrução conjunta e racionalização do fluxo processual.",
+        "sobrestamento": "Recomenda-se o sobrestamento do feito até a superação da dependência processual expressamente identificada.",
+        "indeferimento": "Estando completa a instrução e ausente suporte mínimo para acolhimento, recomenda-se o indeferimento do pedido.",
+        "deferimento": "Estando observados os requisitos mínimos informados, recomenda-se o deferimento do pedido, com os registros de praxe.",
+        "arquivamento": "Não subsistindo providência útil imediata, recomenda-se o arquivamento dos autos, com as anotações cabíveis.",
+        "encaminhamento": "Não há elementos suficientes para despacho final de mérito. Recomenda-se o encaminhamento dos autos para análise técnica e saneamento do que foi apontado.",
+    }
+    return conclusions[action]
+
+
+def _build_minuta(action: str, *, process_number: str, subject: str, specialized_unit: str) -> str:
+    normalized_subject = subject.strip().rstrip(".").lower()
+    templates = {
+        "juntada": (
+            f"Trata-se do processo {process_number}, relativo a {normalized_subject}. "
+            "Considerando a natureza intercorrente do expediente e a dependência de apreciação nos autos principais, "
+            "junte-se o presente expediente ao processo de referência, com a devida vinculação."
+        ),
+        "remessa": (
+            f"Trata-se do processo {process_number}, relativo a {normalized_subject}. "
+            f"Considerando a especialidade da matéria e a necessidade de análise técnica própria, encaminhem-se os autos à {specialized_unit}."
+        ),
+        "exigencia": (
+            f"Trata-se do processo {process_number}, relativo a {normalized_subject}. "
+            "Verifica-se insuficiência de instrução documental para apreciação conclusiva. "
+            "Expeça-se exigência para apresentação dos elementos faltantes, com posterior retorno para análise."
+        ),
+        "apensamento": (
+            f"Trata-se do processo {process_number}, relativo a {normalized_subject}. "
+            "Verificada a correlação material com autos conexos, apense-se o presente expediente para processamento conjunto."
+        ),
+        "sobrestamento": (
+            f"Trata-se do processo {process_number}, relativo a {normalized_subject}. "
+            "Considerando a dependência de autos principais para o exame de mérito, sobreste-se o feito até ulterior regularização."
+        ),
+        "indeferimento": (
+            f"Trata-se do processo {process_number}, relativo a {normalized_subject}. "
+            "Ausentes os pressupostos necessários ao acolhimento do pedido, indefiro o pleito, nos termos da fundamentação aplicável."
+        ),
+        "deferimento": (
+            f"Trata-se do processo {process_number}, relativo a {normalized_subject}. "
+            "Atendidos os requisitos mínimos informados para apreciação do pedido, defiro o pleito, com as providências subsequentes."
+        ),
+        "arquivamento": (
+            f"Trata-se do processo {process_number}, relativo a {normalized_subject}. "
+            "Ausente providência útil imediata, arquivem-se os autos, observadas as cautelas de praxe."
+        ),
+        "encaminhamento": (
+            f"Trata-se do processo {process_number}, relativo a {normalized_subject}. "
+            "Verificam-se pendências que impedem, por ora, a apreciação conclusiva do mérito. "
+            "Encaminhem-se os autos para análise técnica e saneamento das inconsistências apontadas."
+        ),
+    }
+    return templates[action]
+
+
+def build_institutional_output(
+    audit_data: dict[str, Any],
+    *,
+    source: str = "audit_data_estruturado",
+) -> dict[str, Any]:
     process_number = _clean_text(audit_data.get("process_number"), default="Não identificado nos autos auditados.")
     process_type = _clean_text(audit_data.get("process_type"), default="Não identificado.")
     interested_party = _clean_text(audit_data.get("interested_party"), default="Não identificado nos autos auditados.")
     subject = _clean_text(audit_data.get("subject"), default="Matéria não identificada nos autos auditados.")
     stage = _clean_text(audit_data.get("stage"), default="Fase processual não identificada.")
+    origin_unit = _clean_text(audit_data.get("origin_unit"), default="Não identificada.")
     specialized_unit = _clean_text(audit_data.get("specialized_unit"), default="Não indicada.")
 
     documents_present = _clean_list(audit_data.get("documents_present"))
@@ -96,105 +219,41 @@ def build_institutional_output(audit_data: dict[str, Any]) -> dict[str, Any]:
     competence_notes = _clean_list(audit_data.get("competence_notes"))
 
     achados: list[str] = []
-    if documents_present:
-        achados.extend(f"Consta {item}." for item in documents_present)
-    if documents_missing:
-        achados.extend(f"Não consta {item}." for item in documents_missing)
-    if inconsistencies:
-        achados.extend(f"Verifica-se {item}." for item in inconsistencies)
+    achados.extend(_sentence("Consta", item) for item in documents_present)
+    achados.extend(_sentence("Não consta", item) for item in documents_missing)
+    achados.extend(_sentence("Verifica-se", item) for item in inconsistencies)
     if not achados:
         achados.append("Não foram informados achados objetivos suficientes para conclusão de mérito.")
 
     enquadramento: list[str] = []
-    if legal_basis:
-        enquadramento.extend(legal_basis)
-    if competence_notes:
-        enquadramento.extend(competence_notes)
+    enquadramento.extend(item.rstrip(".") + "." for item in legal_basis)
+    enquadramento.extend(item.rstrip(".") + "." for item in competence_notes)
     if audit_data.get("depends_on_main_process"):
         enquadramento.append("O exame depende de processo principal para conclusão de mérito.")
-    if specialized_unit and specialized_unit != "Não indicada.":
+    if specialized_unit != "Não indicada.":
         enquadramento.append(f"A matéria indica atuação da unidade especializada {specialized_unit}.")
     if not enquadramento:
         enquadramento.append("O enquadramento normativo e procedimental depende de complementação dos dados estruturados.")
 
     riscos_ou_lacunas: list[str] = []
-    if documents_missing:
-        riscos_ou_lacunas.extend(f"Ausência de {item}." for item in documents_missing)
-    if inconsistencies:
-        riscos_ou_lacunas.extend(f"Inconsistência identificada: {item}." for item in inconsistencies)
+    riscos_ou_lacunas.extend(_sentence("Ausência de", item) for item in documents_missing)
+    riscos_ou_lacunas.extend(_sentence("Inconsistência identificada:", item) for item in inconsistencies)
     if audit_data.get("depends_on_main_process"):
         riscos_ou_lacunas.append("Dependência de processo principal para exame conclusivo do mérito.")
     if not riscos_ou_lacunas:
         riscos_ou_lacunas.append("Sem lacunas materiais explicitamente informadas no objeto de auditoria.")
 
     action = infer_recommended_action(audit_data)
-    action_titles = {
-        "juntada": "juntada/vinculação",
-        "remessa": "remessa",
-        "exigencia": "exigência",
-        "apensamento": "apensamento",
-        "sobrestamento": "sobrestamento",
-        "indeferimento": "indeferimento",
-        "deferimento": "deferimento",
-        "arquivamento": "arquivamento",
-        "encaminhamento": "encaminhamento",
-    }
-    action_text = action_titles[action]
+    qualificacao = _classify_issue(audit_data, action)
 
-    conclusion_map = {
-        "juntada": "Recomenda-se a juntada ou vinculação ao processo principal, com preservação da análise de mérito para os autos de referência.",
-        "remessa": f"Recomenda-se a remessa dos autos à unidade competente ({specialized_unit}) para análise temática, diante da especialização indicada.",
-        "exigencia": "Recomenda-se a expedição de exigência para saneamento das lacunas documentais antes de apreciação conclusiva.",
-        "apensamento": "Recomenda-se o apensamento dos autos correlatos para instrução conjunta e racionalização do fluxo processual.",
-        "sobrestamento": "Recomenda-se o sobrestamento do feito até a superação da condição processual pendente expressamente identificada.",
-        "indeferimento": "Estando completa a instrução e ausente suporte mínimo para acolhimento, recomenda-se o indeferimento do pedido.",
-        "deferimento": "Estando observados os requisitos mínimos informados, recomenda-se o deferimento do pedido, com os registros de praxe.",
-        "arquivamento": "Não subsistindo providência útil imediata, recomenda-se o arquivamento dos autos, com as anotações cabíveis.",
-        "encaminhamento": "Não há elementos suficientes para despacho final de mérito. Recomenda-se o encaminhamento dos autos para análise técnica e saneamento do que foi apontado.",
+    source_notes = {
+        "fonte": source,
+        "trata_se_de_leitura_preliminar": "sim" if source != "audit_data_estruturado" else "não",
     }
-    conclusion = conclusion_map[action]
-
-    minuta_templates = {
-        "juntada": (
-            f"Trata-se do processo {process_number}, relativo a {subject.lower()}. "
-            "Considerando a natureza intercorrente do expediente e a dependência de apreciação nos autos principais, "
-            "junte-se o presente expediente ao processo de referência, com a devida vinculação."
-        ),
-        "remessa": (
-            f"Trata-se do processo {process_number}, relativo a {subject.lower()}. "
-            f"Considerando a especialidade da matéria e a necessidade de análise técnica própria, encaminhem-se os autos à {specialized_unit}."
-        ),
-        "exigencia": (
-            f"Trata-se do processo {process_number}, relativo a {subject.lower()}. "
-            "Verifica-se insuficiência de instrução documental para apreciação conclusiva. "
-            "Expeça-se exigência para apresentação dos elementos faltantes, com posterior retorno para análise."
-        ),
-        "apensamento": (
-            f"Trata-se do processo {process_number}, relativo a {subject.lower()}. "
-            "Verificada a correlação material com autos conexos, apense-se o presente expediente para processamento conjunto."
-        ),
-        "sobrestamento": (
-            f"Trata-se do processo {process_number}, relativo a {subject.lower()}. "
-            "Considerando a pendência processual prejudicial ao exame de mérito, sobreste-se o feito até ulterior regularização."
-        ),
-        "indeferimento": (
-            f"Trata-se do processo {process_number}, relativo a {subject.lower()}. "
-            "Ausentes os pressupostos necessários ao acolhimento do pedido, indefiro o pleito, nos termos da fundamentação aplicável."
-        ),
-        "deferimento": (
-            f"Trata-se do processo {process_number}, relativo a {subject.lower()}. "
-            "Atendidos os requisitos mínimos informados para apreciação do pedido, defiro o pleito, com as providências subsequentes."
-        ),
-        "arquivamento": (
-            f"Trata-se do processo {process_number}, relativo a {subject.lower()}. "
-            "Ausente providência útil imediata, arquivem-se os autos, observadas as cautelas de praxe."
-        ),
-        "encaminhamento": (
-            f"Trata-se do processo {process_number}, relativo a {subject.lower()}. "
-            "Verificam-se pendências que impedem, por ora, a apreciação conclusiva do mérito. "
-            "Encaminhem-se os autos para análise técnica e saneamento das inconsistências apontadas."
-        ),
-    }
+    if source != "audit_data_estruturado":
+        source_notes["observacao"] = (
+            "Saída derivada de bundle TCRIA. Campos processuais ausentes no bundle foram preservados como não identificados."
+        )
 
     return {
         "identificacao_do_caso": {
@@ -202,15 +261,23 @@ def build_institutional_output(audit_data: dict[str, Any]) -> dict[str, Any]:
             "tipo": process_type,
             "interessado": interested_party,
             "tema": subject,
+            "unidade_origem": origin_unit,
             "fase": stage,
             "unidade_competente_sugerida": specialized_unit,
         },
         "achados_objetivos": achados,
         "enquadramento": enquadramento,
+        "qualificacao_do_problema": qualificacao,
         "riscos_ou_lacunas": riscos_ou_lacunas,
-        "conclusao_operacional": conclusion,
-        "tipo_de_ato_sugerido": action_text,
-        "minuta_sugerida": minuta_templates[action],
+        "conclusao_operacional": _build_conclusion(action, specialized_unit=specialized_unit),
+        "tipo_de_ato_sugerido": ACTION_LABELS[action],
+        "minuta_sugerida": _build_minuta(
+            action,
+            process_number=process_number,
+            subject=subject,
+            specialized_unit=specialized_unit,
+        ),
+        "metadados_da_saida": source_notes,
     }
 
 
@@ -224,7 +291,6 @@ def build_institutional_output_from_bundle(bundle: dict[str, Any]) -> dict[str, 
         for record in all_records[:6]
         if record.get("file_name") and record.get("classification")
     ]
-
     unreadable = [
         record.get("file_name")
         for record in all_records
@@ -242,15 +308,15 @@ def build_institutional_output_from_bundle(bundle: dict[str, Any]) -> dict[str, 
     if unreadable:
         inconsistencies.append("impossibilidade de leitura integral em " + ", ".join(unreadable))
 
+    route_counts = bundle.get("route_counts") if isinstance(bundle.get("route_counts"), dict) else {}
     legal_basis = [
         _clean_text(bundle.get("audit_basis"), default=""),
         f"Modo de compliance: {_clean_text(bundle.get('compliance_gate_mode'), default='não informado')}",
     ]
     legal_basis = [item for item in legal_basis if item]
 
-    route_counts = bundle.get("route_counts") if isinstance(bundle.get("route_counts"), dict) else {}
     competence_notes = [
-        f"Distribuição de rotas identificada na auditoria: {_join_labels(route_counts)}."
+        f"Distribuição de rotas identificada na auditoria: {_compact_dict(route_counts)}."
     ]
     if bundle.get("accusation_set_count"):
         competence_notes.append(
@@ -262,17 +328,18 @@ def build_institutional_output_from_bundle(bundle: dict[str, Any]) -> dict[str, 
         )
 
     recommended_action = "encaminhamento"
-    if unreadable:
-        recommended_action = "exigencia"
-    elif blocked:
+    if blocked:
         recommended_action = "remessa"
+    elif unreadable:
+        recommended_action = "exigencia"
 
     audit_data = {
-        "process_number": bundle.get("process_number") or bundle.get("input_path"),
-        "process_type": "auditoria documental",
-        "interested_party": bundle.get("interested_party") or "Não identificado nos autos auditados.",
-        "subject": "auditoria de governança documental",
-        "stage": "análise automatizada inicial",
+        "process_number": bundle.get("process_number") or "Não identificado no bundle TCRIA.",
+        "process_type": "auditoria documental derivada de bundle",
+        "interested_party": bundle.get("interested_party") or "Não identificado no bundle TCRIA.",
+        "subject": bundle.get("subject") or "matéria não detalhada no bundle TCRIA",
+        "origin_unit": bundle.get("origin_unit") or "Não identificada no bundle TCRIA.",
+        "stage": bundle.get("stage") or "análise automatizada inicial",
         "documents_present": documents_present,
         "documents_missing": [f"leitura válida do arquivo '{name}'" for name in unreadable],
         "inconsistencies": inconsistencies,
@@ -282,24 +349,60 @@ def build_institutional_output_from_bundle(bundle: dict[str, Any]) -> dict[str, 
         "specialized_unit": "Revisão humana especializada" if blocked else "",
         "recommended_action": recommended_action,
     }
-    return build_institutional_output(audit_data)
+    return build_institutional_output(audit_data, source="bundle_tcria")
 
 
 def render_institutional_markdown(output: dict[str, Any]) -> str:
     identification = output.get("identificacao_do_caso") or {}
+    qualificacao = output.get("qualificacao_do_problema") or {}
+    metadata = output.get("metadados_da_saida") or {}
+
     lines = ["# TCRIA Institutional Output", ""]
-    lines.append("## IDENTIFICAÇÃO DO CASO")
-    lines.append("")
-    for label, key in [
-        ("Processo", "processo"),
-        ("Tipo", "tipo"),
-        ("Interessado", "interessado"),
-        ("Tema", "tema"),
-        ("Fase", "fase"),
-        ("Unidade competente sugerida", "unidade_competente_sugerida"),
-    ]:
-        lines.append(f"- **{label}:** {identification.get(key, 'Não informado.')}")
-    lines.append("")
+
+    sections = [
+        (
+            "IDENTIFICAÇÃO DO CASO",
+            [
+                ("Processo", "processo"),
+                ("Tipo", "tipo"),
+                ("Interessado", "interessado"),
+                ("Tema", "tema"),
+                ("Unidade de origem", "unidade_origem"),
+                ("Fase", "fase"),
+                ("Unidade competente sugerida", "unidade_competente_sugerida"),
+            ],
+            identification,
+        ),
+        (
+            "QUALIFICAÇÃO DO PROBLEMA",
+            [
+                ("Natureza do vício", "natureza_do_vicio"),
+                ("Maturidade decisória", "nivel_de_maturidade_decisoria"),
+                ("Há unidade especializada", "ha_unidade_especializada"),
+                ("Depende de processo principal", "depende_de_processo_principal"),
+                ("Ato recomendado", "ato_recomendado"),
+            ],
+            qualificacao,
+        ),
+        (
+            "METADADOS DA SAÍDA",
+            [
+                ("Fonte", "fonte"),
+                ("Leitura preliminar", "trata_se_de_leitura_preliminar"),
+                ("Observação", "observacao"),
+            ],
+            metadata,
+        ),
+    ]
+
+    for title, rows, data in sections:
+        lines.append(f"## {title}")
+        lines.append("")
+        for label, key in rows:
+            value = data.get(key)
+            if value:
+                lines.append(f"- **{label}:** {value}")
+        lines.append("")
 
     for title, key in [
         ("ACHADOS OBJETIVOS", "achados_objetivos"),
@@ -316,7 +419,8 @@ def render_institutional_markdown(output: dict[str, Any]) -> str:
     lines.append("")
     lines.append(output.get("conclusao_operacional", "Não informada."))
     lines.append("")
-    lines.append(f"**Tipo de ato sugerido:** {output.get('tipo_de_ato_sugerido', 'Não informado.')}\n")
+    lines.append(f"**Tipo de ato sugerido:** {output.get('tipo_de_ato_sugerido', 'Não informado.')}")
+    lines.append("")
     lines.append("## MINUTA SUGERIDA")
     lines.append("")
     lines.append(output.get("minuta_sugerida", "Não informada."))

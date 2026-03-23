@@ -6,7 +6,7 @@ from pathlib import Path
 import streamlit as st
 
 from tcria.engine import TCRIAEngine
-from tcria.institutional_output import render_institutional_markdown
+from tcria.institutional_output import build_institutional_output, render_institutional_markdown
 from tcria.openai_responses import list_audit_prompt_presets, run_audit_prompt
 from tcria.settings import load_env
 
@@ -28,6 +28,14 @@ def render() -> None:
     include_pdf = st.checkbox("Generate PDF report", value=True)
     use_official_pipeline = st.checkbox("Use official governance pipeline scripts", value=False)
     use_openai_summary = st.checkbox("Run Responses API analysis", value=False)
+    institutional_input = st.text_area(
+        "Structured institutional data (JSON)",
+        value="",
+        help=(
+            "Optional. Paste `audit_data` here to generate a client-ready institutional document "
+            "with process metadata richer than the raw bundle."
+        ),
+    )
 
     presets = list_audit_prompt_presets()
     preset_map = {preset["label"]: preset for preset in presets}
@@ -70,6 +78,17 @@ def render() -> None:
             return
 
         st.success("Audit completed.")
+
+        institutional_override = None
+        if institutional_input.strip():
+            try:
+                parsed_institutional_input = json.loads(institutional_input)
+                if not isinstance(parsed_institutional_input, dict):
+                    raise ValueError("The JSON must be an object.")
+                institutional_override = build_institutional_output(parsed_institutional_input)
+            except Exception as exc:
+                st.warning(f"Structured institutional data ignored: {exc}")
+
         tab_summary, tab_institutional, tab_bundle = st.tabs(
             ["Resumo executivo", "Saída institucional", "Bundle bruto"]
         )
@@ -89,9 +108,11 @@ def render() -> None:
                 st.info("O bundle não foi retornado em formato estruturado.")
 
         with tab_institutional:
-            institutional_output = result.get("institutional_output") if isinstance(result, dict) else None
+            institutional_output = institutional_override or (result.get("institutional_output") if isinstance(result, dict) else None)
             if isinstance(institutional_output, dict):
                 identification = institutional_output.get("identificacao_do_caso", {})
+                qualification = institutional_output.get("qualificacao_do_problema", {})
+                metadata = institutional_output.get("metadados_da_saida", {})
                 st.subheader("Identificação do caso")
                 st.table(
                     [
@@ -99,6 +120,7 @@ def render() -> None:
                         {"Campo": "Tipo", "Valor": identification.get("tipo")},
                         {"Campo": "Interessado", "Valor": identification.get("interessado")},
                         {"Campo": "Tema", "Valor": identification.get("tema")},
+                        {"Campo": "Unidade de origem", "Valor": identification.get("unidade_origem")},
                         {"Campo": "Fase", "Valor": identification.get("fase")},
                         {
                             "Campo": "Unidade competente sugerida",
@@ -116,6 +138,23 @@ def render() -> None:
                     for item in institutional_output.get(key, []):
                         st.markdown(f"- {item}")
 
+                st.subheader("Qualificação do problema")
+                st.table(
+                    [
+                        {"Campo": "Natureza do vício", "Valor": qualification.get("natureza_do_vicio")},
+                        {
+                            "Campo": "Maturidade decisória",
+                            "Valor": qualification.get("nivel_de_maturidade_decisoria"),
+                        },
+                        {"Campo": "Há unidade especializada", "Valor": qualification.get("ha_unidade_especializada")},
+                        {
+                            "Campo": "Depende de processo principal",
+                            "Valor": qualification.get("depende_de_processo_principal"),
+                        },
+                        {"Campo": "Ato recomendado", "Valor": qualification.get("ato_recomendado")},
+                    ]
+                )
+
                 st.subheader("Conclusão operacional")
                 st.write(institutional_output.get("conclusao_operacional"))
                 st.caption(f"Ato sugerido: {institutional_output.get('tipo_de_ato_sugerido')}")
@@ -130,6 +169,11 @@ def render() -> None:
                 )
                 st.write("**JSON estruturado**")
                 st.json(institutional_output)
+                if metadata:
+                    st.caption(
+                        f"Fonte: {metadata.get('fonte')} | "
+                        f"Leitura preliminar: {metadata.get('trata_se_de_leitura_preliminar')}"
+                    )
             else:
                 st.info("A saída institucional não foi gerada para este resultado.")
 

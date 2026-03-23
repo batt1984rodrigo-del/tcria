@@ -6,6 +6,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
@@ -13,6 +14,7 @@ from pydantic import BaseModel, Field
 from tcria.cli import case_init, case_run, investigate, load_manifest, resolve_case_dir
 from tcria.conclusion_engine import build_conclusion_report, render_final_conclusions_md
 from tcria.engine import TCRIAEngine
+from tcria.institutional_output import build_institutional_output, render_institutional_markdown
 from tcria.openai_responses import (
     list_audit_prompt_presets,
     run_audit_prompt,
@@ -69,6 +71,13 @@ class CaseInvestigateRequest(CaseInitRequest):
 
 class BundleConclusionRequest(BaseModel):
     bundle_json_path: str = Field(..., description="Path to an audit bundle JSON.")
+
+
+class InstitutionalOutputRequest(BaseModel):
+    audit_data: dict[str, Any] = Field(
+        ...,
+        description="Structured process audit data used to build an institutional dispatch-ready output.",
+    )
 
 
 class LegacyGatewayAuditRequest(BaseModel):
@@ -236,6 +245,7 @@ def capabilities() -> dict[str, object]:
             "case_run",
             "case_investigate",
             "bundle_conclusions",
+            "institutional_output_render",
             "legacy_gateway_audit",
         ]
     }
@@ -378,6 +388,15 @@ def api_bundle_conclusions(payload: BundleConclusionRequest) -> dict[str, object
     return {
         "conclusions": conclusions,
         "markdown": render_final_conclusions_md(conclusions),
+    }
+
+
+@app.post("/institutional-output/render")
+def api_render_institutional_output(payload: InstitutionalOutputRequest) -> dict[str, object]:
+    output = build_institutional_output(payload.audit_data)
+    return {
+        "institutional_output": output,
+        "markdown": render_institutional_markdown(output),
     }
 
 
