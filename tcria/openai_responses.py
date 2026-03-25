@@ -5,6 +5,8 @@ import os
 from dataclasses import dataclass
 from typing import Any
 
+from tcria.institutional_profiles import get_institutional_chat_profile, list_institutional_chat_profiles
+from tcria.institutional_output import INSTITUTIONAL_OUTPUT_SCHEMA, normalize_institutional_output
 from tcria.settings import load_env
 
 
@@ -17,7 +19,6 @@ SYSTEM_PROMPT = (
     "Summarize governance findings, accountability risks, documentary gaps, and operational next steps. "
     "Do not give legal advice or invent facts outside the bundle."
 )
-
 
 @dataclass(frozen=True)
 class AuditPromptPreset:
@@ -102,6 +103,10 @@ def list_audit_prompt_presets() -> list[dict[str, str]]:
         }
         for preset in AUDIT_PROMPT_PRESETS.values()
     ]
+
+
+def list_available_institutional_chat_profiles() -> list[dict[str, str]]:
+    return list_institutional_chat_profiles()
 
 
 def get_audit_prompt_preset(audit_type: str) -> AuditPromptPreset:
@@ -207,6 +212,17 @@ def _response_metadata(response: Any) -> dict[str, Any]:
     }
 
 
+def _parse_json_response(response: Any) -> dict[str, Any]:
+    text = _extract_response_text(response)
+    try:
+        payload = json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"OpenAI response did not return valid JSON: {exc}") from exc
+    if not isinstance(payload, dict):
+        raise RuntimeError("OpenAI response did not return a JSON object.")
+    return payload
+
+
 def run_audit_prompt(
     bundle: dict[str, Any],
     *,
@@ -252,6 +268,56 @@ def run_audit_prompt(
         "prompt_used": prompt_payload["user_context"],
         "response_text": _extract_response_text(response),
         "response_metadata": _response_metadata(response),
+    }
+
+
+def run_institutional_output_prompt(
+    audit_data: dict[str, Any],
+    *,
+    model: str | None = None,
+    user_context: str | None = None,
+    chat_profile: str = "fazendario_institucional",
+    system_prompt_override: str | None = None,
+) -> dict[str, Any]:
+    try:
+        from openai import OpenAI
+    except Exception as exc:
+        raise RuntimeError("OpenAI SDK is not installed. Run `pip install -e .` after adding the dependency.") from exc
+
+    api_key = os.getenv("OPENAI_API_KEY", "").strip()
+    if not api_key:
+        raise RuntimeError("OPENAI_API_KEY is not set.")
+
+    profile = get_institutional_chat_profile(chat_profile)
+    client = OpenAI(api_key=api_key)
+    prompt_payload = {
+        "task": "Gerar saída institucional para auditoria processual.",
+        "user_context": user_context or "Aplicar redação institucional formal, pronta para expediente.",
+        "chat_profile": profile.slug,
+        "schema": INSTITUTIONAL_OUTPUT_SCHEMA,
+        "audit_data": audit_data,
+    }
+
+    response = client.responses.create(
+        model=model or os.getenv("TCRIA_OPENAI_MODEL", DEFAULT_OPENAI_MODEL),
+        input=[
+            {
+                "role": "system",
+                "content": [{"type": "input_text", "text": system_prompt_override or profile.system_prompt}],
+            },
+            {
+                "role": "user",
+                "content": [{"type": "input_text", "text": json.dumps(prompt_payload, ensure_ascii=False, indent=2)}],
+            },
+        ],
+    )
+    parsed = normalize_institutional_output(_parse_json_response(response))
+    return {
+        "institutional_output": parsed,
+        "response_metadata": {
+            **_response_metadata(response),
+            "chat_profile": profile.slug,
+        },
     }
 
 

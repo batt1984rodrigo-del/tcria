@@ -6,6 +6,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
@@ -13,8 +14,11 @@ from pydantic import BaseModel, Field
 from tcria.cli import case_init, case_run, investigate, load_manifest, resolve_case_dir
 from tcria.conclusion_engine import build_conclusion_report, render_final_conclusions_md
 from tcria.engine import TCRIAEngine
+from tcria.institutional_output import render_institutional_markdown
 from tcria.openai_responses import (
+    list_available_institutional_chat_profiles,
     list_audit_prompt_presets,
+    run_institutional_output_prompt,
     run_audit_prompt,
 )
 from tcria.settings import load_env
@@ -69,6 +73,26 @@ class CaseInvestigateRequest(CaseInitRequest):
 
 class BundleConclusionRequest(BaseModel):
     bundle_json_path: str = Field(..., description="Path to an audit bundle JSON.")
+
+
+class InstitutionalOutputRequest(BaseModel):
+    audit_data: dict[str, Any] = Field(
+        ...,
+        description="Structured process audit data used to build an institutional dispatch-ready output.",
+    )
+    chat_profile: str = Field(
+        "fazendario_institucional",
+        description="Named chat profile used to define the institutional drafting behavior.",
+    )
+    model: str = Field("gpt-4.1-mini", description="OpenAI model used for institutional drafting.")
+    user_context: str | None = Field(
+        default=None,
+        description="Optional extra instruction for the institutional drafting module.",
+    )
+    system_prompt_override: str | None = Field(
+        default=None,
+        description="Optional system-prompt override when you want to define the chat behavior explicitly.",
+    )
 
 
 class LegacyGatewayAuditRequest(BaseModel):
@@ -232,10 +256,12 @@ def capabilities() -> dict[str, object]:
             "audit",
             "official_pipeline",
             "responses_audit",
+            "responses_institutional_profiles",
             "case_init",
             "case_run",
             "case_investigate",
             "bundle_conclusions",
+            "responses_institutional_output",
             "legacy_gateway_audit",
         ]
     }
@@ -244,6 +270,11 @@ def capabilities() -> dict[str, object]:
 @app.get("/responses/audit-types")
 def get_response_audit_types() -> dict[str, object]:
     return {"audit_types": list_audit_prompt_presets()}
+
+
+@app.get("/responses/institutional-profiles")
+def get_institutional_chat_profiles() -> dict[str, object]:
+    return {"chat_profiles": list_available_institutional_chat_profiles()}
 
 
 @app.post("/audit")
@@ -378,6 +409,23 @@ def api_bundle_conclusions(payload: BundleConclusionRequest) -> dict[str, object
     return {
         "conclusions": conclusions,
         "markdown": render_final_conclusions_md(conclusions),
+    }
+
+
+@app.post("/responses/institutional-output")
+def api_run_institutional_output(payload: InstitutionalOutputRequest) -> dict[str, object]:
+    result = run_institutional_output_prompt(
+        payload.audit_data,
+        model=payload.model,
+        user_context=payload.user_context,
+        chat_profile=payload.chat_profile,
+        system_prompt_override=payload.system_prompt_override,
+    )
+    output = result["institutional_output"]
+    return {
+        "institutional_output": output,
+        "markdown": render_institutional_markdown(output),
+        "response_metadata": result["response_metadata"],
     }
 
 
